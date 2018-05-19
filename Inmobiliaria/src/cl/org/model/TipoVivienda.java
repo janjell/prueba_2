@@ -3,16 +3,16 @@ package cl.org.model;
 public class TipoVivienda {
 
     private int id;
-    private boolean casa;
+    private String tipo;
 
     public TipoVivienda() {
     }
 
-    public TipoVivienda(int id, boolean casa) {
+    public TipoVivienda(int id, String tipo) {
         this.id = id;
-        this.casa = casa;
+        this.tipo = tipo;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -21,17 +21,16 @@ public class TipoVivienda {
         this.id = id;
     }
 
-    public boolean isCasa() {
-        return casa;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setCasa(boolean casa) {
-        this.casa = casa;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
     public String toString() {
-        return "TipoVivienda{" + "id=" + id + ", casa=" + casa + '}';
+        return "TipoVivienda{" + "id=" + id + ", tipo=" + tipo + '}';
     }
-
 }

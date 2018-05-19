@@ -4,11 +4,11 @@ USE bd_inmobiliaria;
 
 CREATE TABLE tipoVivienda(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    casa BOOLEAN
+    tipo VARCHAR(100)
 );
 
 CREATE TABLE vivienda(
-    NdeRol INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
+    nrol INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
     direccion VARCHAR(200),
     cantPiezas INT,
     cantBanos INT,
