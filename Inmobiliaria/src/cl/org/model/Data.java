@@ -34,6 +34,7 @@ public class Data {
 
     public void crearVivienda(Vivienda nueva) throws SQLException {
         query = "INSERT INTO vivienda VALUES(NULL,'" + nueva.getDireccion()
+                + "','" + nueva.getEstado()
                 + "','" + nueva.getCantPiezas()
                 + "','" + nueva.getCantBanos()
                 + "','" + nueva.getTipoVivienda()
@@ -44,7 +45,8 @@ public class Data {
     }
 
     public void crearVenta(Venta nueva) throws SQLException {
-        query = "INSERT INTO venta VALUES(NULL,'" + nueva.getIdRol()
+        query = "INSERT INTO venta VALUES(NULL,'" + nueva.getFecha()
+                + "','" + nueva.getIdRol()
                 + "','" + nueva.getIdUsuario()
                 + "','" + nueva.getIdCliente() + "')";
         con.ejecutar(query);
@@ -92,11 +94,12 @@ public class Data {
         while (rs.next()) {
             Vivienda viv = new Vivienda();
             viv.setDireccion(rs.getString(1));
-            viv.setCantPiezas(rs.getInt(2));
-            viv.setCantBanos(rs.getInt(3));
-            viv.setTipoVivienda(rs.getInt(4));
-            viv.setPrecio(rs.getInt(5));
-            viv.setNuevo(rs.getBoolean(6));
+            viv.setEstado(rs.getInt(2));
+            viv.setCantPiezas(rs.getInt(3));
+            viv.setCantBanos(rs.getInt(4));
+            viv.setTipoVivienda(rs.getInt(5));
+            viv.setPrecio(rs.getInt(6));
+            viv.setNuevo(rs.getBoolean(7));
             viviendas.add(viv);
         }
 
@@ -111,9 +114,10 @@ public class Data {
         
         while(rs.next()){
             Venta ven = new Venta();
-            ven.setIdRol(rs.getInt(1));
-            ven.setIdUsuario(rs.getInt(2));
-            ven.setIdCliente(rs.getInt(3));
+            ven.setFecha(rs.getInt(1));
+            ven.setIdRol(rs.getInt(2));
+            ven.setIdUsuario(rs.getInt(3));
+            ven.setIdCliente(rs.getInt(4));
             ventas.add(ven);
         }
         
@@ -132,6 +136,7 @@ public class Data {
 
     public void updateVivienda(Vivienda mod) throws SQLException {
         query = "UPDATE vivienda SET direccion = '" + mod.getDireccion()
+                + "', estado='" + mod.getEstado()
                 + "', cantPiezas='" + mod.getCantPiezas()
                 + "', cantBanos='" + mod.getCantBanos()
                 + "', tipoVivienda='" + mod.getTipoVivienda()
@@ -143,9 +148,10 @@ public class Data {
     }
 
     public void updateVenta(Venta mod) throws SQLException {
-        query = "UPDATE venta SET idRol = '" + mod.getIdRol()
-                + "', idUsuario='" + mod.getIdUsuario()
-                + "', idCliente='" + mod.getIdCliente()
+        query = "UPDATE venta SET fecha = '" + mod.getFecha()
+                + "', rol_fk='" + mod.getIdRol()
+                + "', usuario_fk='" + mod.getIdUsuario()
+                + "', cliente_fk='" + mod.getIdCliente()
                 + "' WHERE id = '" + mod.getId() + "'";
         con.ejecutar(query);
         con.close();
@@ -235,11 +241,12 @@ public class Data {
         while (rs.next()) {
             viv = new Vivienda();
             viv.setDireccion(rs.getString(1));
-            viv.setCantPiezas(rs.getInt(2));
-            viv.setCantBanos(rs.getInt(3));
-            viv.setTipoVivienda(rs.getInt(4));
-            viv.setPrecio(rs.getInt(5));
-            viv.setNuevo(rs.getBoolean(6));
+            viv.setEstado(rs.getInt(2));
+            viv.setCantPiezas(rs.getInt(3));
+            viv.setCantBanos(rs.getInt(4));
+            viv.setTipoVivienda(rs.getInt(5));
+            viv.setPrecio(rs.getInt(6));
+            viv.setNuevo(rs.getBoolean(7));
         }
 
         con.close();

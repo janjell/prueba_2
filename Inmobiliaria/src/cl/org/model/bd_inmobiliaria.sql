@@ -10,15 +10,28 @@ CREATE TABLE tipoVivienda(
 insert into tipoVivienda values(null,'Casa');
 insert into tipoVivienda values(null,'Departamento');
 
+CREATE TABLE estado(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(100)
+);
+
+INSERT INTO estado VALUES(NULL,'En Arriendo');
+INSERT INTO estado VALUES(NULL,'Arrendada');
+INSERT INTO estado VALUES(NULL,'Vendida');
+INSERT INTO estado VALUES(NULL,'En Venta');
+INSERT INTO estado VALUES(NULL,'Reservada');
+
 CREATE TABLE vivienda(
     nrol INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
     direccion VARCHAR(200),
+    estado INT,
     cantPiezas INT,
     cantBanos INT,
     tipoVivienda INT,
     precio INT,
     nuevo BOOLEAN,
-    FOREIGN KEY(tipoVivienda) references tipoVivienda(id)
+    FOREIGN KEY(tipoVivienda) references tipoVivienda(id),
+    FOREIGN KEY(estado) REFERENCES estado(id)
 );
 
 select * from vivienda;
@@ -43,6 +56,7 @@ select * from cliente;
 
 CREATE TABLE venta(
     id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha DATETIME,
     rol_fk INT REFERENCES vivienda(nrol),
     usuario_fk INT REFERENCES usuario(id),
     cliente_fk INT REFERENCES cliente(id)

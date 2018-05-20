@@ -3,6 +3,7 @@ package cl.org.model;
 public class Venta {
 
     private int id;
+    private int fecha;
     private int idRol;
     private int idUsuario;
     private int idCliente;
@@ -10,19 +11,28 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int id, int idRol, int idUsuario, int idCliente) {
+    public Venta(int id, int fecha, int idRol, int idUsuario, int idCliente) {
         this.id = id;
+        this.fecha = fecha;
         this.idRol = idRol;
         this.idUsuario = idUsuario;
         this.idCliente = idCliente;
     }
-
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(int fecha) {
+        this.fecha = fecha;
     }
 
     public int getIdRol() {
@@ -51,6 +61,6 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", idRol=" + idRol + ", idUsuario=" + idUsuario + ", idCliente=" + idCliente + '}';
+        return "Venta{" + "id=" + id + ", fecha=" + fecha + ", idRol=" + idRol + ", idUsuario=" + idUsuario + ", idCliente=" + idCliente + '}';
     }
 }
