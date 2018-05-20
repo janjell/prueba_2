@@ -2,6 +2,8 @@ package cl.org.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Data {
 
@@ -141,6 +143,32 @@ public class Data {
 //        con.ejecutar(query);
 //        con.close();
 //    }
+    
+    public List<Vivienda> getViviendas() throws SQLException {
+        query = "select * from vivienda";
+        List<Vivienda>viviendas = new ArrayList<>();
+        Vivienda v; 
+
+        rs = con.ejecutarSelect(query);
+        while (rs.next()) {
+            v = new Vivienda();
+            
+            v.setnDeRol(rs.getInt(1));
+            v.setDireccion(rs.getString(2));
+            v.setCantPiezas(rs.getInt(3));
+            v.setCantBanos(rs.getInt(4));
+            v.setTipoVivienda(rs.getInt(5));
+            v.setPrecio(rs.getInt(6));
+            v.isNuevo();
+            
+            viviendas.add(v);
+            
+        }
+        con.close();
+        return viviendas;
+    }
+    
+    
 
     // Existencia
     public int existeUsuario(String run) throws SQLException {

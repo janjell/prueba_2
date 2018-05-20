@@ -48,5 +48,16 @@ CREATE TABLE venta(
     cliente_fk INT REFERENCES cliente(id)
 );
 
+insert into venta values(null,1,1,1);
+insert into venta values(null,2,1,1);
+
+select * from venta;
+
+select venta.rol_fk as 'Numero de Rol' ,venta.usuario_fk as 'Usuario' ,venta.cliente_fk as 'Cliente'
+from venta ,usuario ,vivienda, cliente
+where venta.rol_fk = vivienda.nrol and venta.usuario_fk = usuario.id
+and venta.cliente_fk = cliente.id
+
+
 -- 1 = admin - 0 = vendedor
 INSERT INTO usuario VALUES(NULL, '11-1', 'admin',1);

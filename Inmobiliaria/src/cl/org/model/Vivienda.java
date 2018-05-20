@@ -83,6 +83,7 @@ public class Vivienda {
     public String toString() {
         return "Vivienda{" + "nDeRol=" + nDeRol + ", direccion=" + direccion + ", cantPiezas=" + cantPiezas + ", cantBanos=" + cantBanos + ", tipoVivienda=" + tipoVivienda + ", precio=" + precio + ", nuevo=" + nuevo + '}';
     }
+
     
     
 }
