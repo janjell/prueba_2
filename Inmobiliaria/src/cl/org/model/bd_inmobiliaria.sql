@@ -7,6 +7,9 @@ CREATE TABLE tipoVivienda(
     tipo VARCHAR(100)
 );
 
+insert into tipoVivienda values(null,'Casa');
+insert into tipoVivienda values(null,'Departamento');
+
 CREATE TABLE vivienda(
     nrol INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
     direccion VARCHAR(200),
@@ -18,12 +21,16 @@ CREATE TABLE vivienda(
     FOREIGN KEY(tipoVivienda) references tipoVivienda(id)
 );
 
+select * from vivienda;
+
 CREATE TABLE usuario(
     id INT AUTO_INCREMENT PRIMARY KEY,
     run VARCHAR(20) UNIQUE,
     nombre VARCHAR(200),
     administrador boolean
 );
+
+select * from usuario;
 
 CREATE TABLE cliente(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,9 +39,11 @@ CREATE TABLE cliente(
     sueldo int
 );
 
+select * from cliente;
+
 CREATE TABLE venta(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    rol_fk INT REFERENCES vivienda(rol),
+    rol_fk INT REFERENCES vivienda(nrol),
     usuario_fk INT REFERENCES usuario(id),
     cliente_fk INT REFERENCES cliente(id)
 );

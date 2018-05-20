@@ -17,7 +17,7 @@ public class Data {
     public void crearUsuario(Usuario nuevo) throws SQLException {
         query = "INSERT INTO usuario VALUES(NULL,'" + nuevo.getRun()
                 + "','" + nuevo.getNombre()
-                + "','" + nuevo.isAdministrador() + "')";
+                + "'," + nuevo.isAdministrador() + ")";
         con.ejecutar(query);
         con.close();
     }
@@ -36,7 +36,7 @@ public class Data {
                 + "','" + nueva.getCantBanos()
                 + "','" + nueva.getTipoVivienda()
                 + "','" + nueva.getPrecio()
-                + "','" + nueva.isNuevo() + "')";
+                + "', " + nueva.isNuevo() + ")";
         con.ejecutar(query);
         con.close();
     }
@@ -49,23 +49,29 @@ public class Data {
         con.close();
     }
 
-    public void crearTipoVivienda(TipoVivienda nueva) throws SQLException {
-        query = "INSERT INTO venta VALUES(NULL,'" + nueva.getTipo() + "')";
-        con.ejecutar(query);
-        con.close();
-    }
+    //Esta demas porque el tipo de vivienda se crea en la base de datos
+    
+//    public void crearTipoVivienda(TipoVivienda nueva) throws SQLException {
+//        query = "INSERT INTO venta VALUES(NULL,'" + nueva.getTipo() + "')";
+//        con.ejecutar(query);
+//        con.close();
+//    }
 
     // Leer
     // Por hacer... 
     // Actualizar
-    public void updateUsuario(Usuario mod) throws SQLException {
-        query = "UPDATE usuario SET nombre = '" + mod.getNombre()
-                + "', administrador='" + mod.isAdministrador()
-                + "' WHERE run = '" + mod.getRun() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
-
+    
+    //Esta demas porque en ningun momento te pide que cambies los datos del usuario
+    
+//    public void updateUsuario(Usuario mod) throws SQLException {
+//        query = "UPDATE usuario SET nombre = '" + mod.getNombre()
+//                + "', administrador='" + mod.isAdministrador()
+//                + "' WHERE run = '" + mod.getRun() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
+    
+    
     public void updateCliente(Cliente mod) throws SQLException {
         query = "UPDATE cliente SET nombre = '" + mod.getNombre()
                 + "', sueldo='" + mod.getSueldo()
@@ -94,44 +100,47 @@ public class Data {
         con.ejecutar(query);
         con.close();
     }
+    
+    //el tipo de vivienda no se puede updatear
 
-    public void updateTipoVivienda(TipoVivienda mod) throws SQLException {
-        query = "UPDATE tipoVivienda SET tipo = '" + mod.getTipo()
-                + "' WHERE id = '" + mod.getId() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
+//    public void updateTipoVivienda(TipoVivienda mod) throws SQLException {
+//        query = "UPDATE tipoVivienda SET tipo = '" + mod.getTipo()
+//                + "' WHERE id = '" + mod.getId() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
 
-    // Borrar
-    public void borrarUsuario(Usuario del) throws SQLException {
-        query = "DELETE usuario WHERE run = '" + del.getRun() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
-
-    public void borrarCliente(Cliente del) throws SQLException {
-        query = "DELETE cliente WHERE run = '" + del.getRun() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
-
-    public void borrarVivienda(Vivienda del) throws SQLException {
-        query = "DELETE vivienda WHERE nrol = '" + del.getnDeRol() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
-
-    public void borrarVenta(Venta del) throws SQLException {
-        query = "DELETE venta WHERE id = '" + del.getId() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
-
-    public void borrarTipoVivienda(TipoVivienda del) throws SQLException {
-        query = "DELETE tipoVivienda WHERE id = '" + del.getId() + "'";
-        con.ejecutar(query);
-        con.close();
-    }
+    // Borrar 
+    //En ningun momento te piden borrar datos
+//    public void borrarUsuario(Usuario del) throws SQLException {
+//        query = "DELETE usuario WHERE run = '" + del.getRun() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
+//
+//    public void borrarCliente(Cliente del) throws SQLException {
+//        query = "DELETE cliente WHERE run = '" + del.getRun() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
+//
+//    public void borrarVivienda(Vivienda del) throws SQLException {
+//        query = "DELETE vivienda WHERE nrol = '" + del.getnDeRol() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
+//
+//    public void borrarVenta(Venta del) throws SQLException {
+//        query = "DELETE venta WHERE id = '" + del.getId() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
+//
+//    public void borrarTipoVivienda(TipoVivienda del) throws SQLException {
+//        query = "DELETE tipoVivienda WHERE id = '" + del.getId() + "'";
+//        con.ejecutar(query);
+//        con.close();
+//    }
 
     // Existencia
     public int existeUsuario(String run) throws SQLException {
