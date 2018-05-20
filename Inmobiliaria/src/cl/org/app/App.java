@@ -1076,7 +1076,7 @@ public class App extends javax.swing.JFrame {
 
     private void cargarTablaViviendas() {
         try {
-            List<Vivienda> viviendas = d.getViviendas();
+            List<Vivienda> viviendas = d.verViviendas();
             TMVivienda tabla = new TMVivienda(viviendas);
             tabviviendas.setModel(tabla);//nombre de la tabla    }
 

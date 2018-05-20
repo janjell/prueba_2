@@ -2,8 +2,8 @@ package cl.org.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Data {
 
@@ -51,29 +51,77 @@ public class Data {
         con.close();
     }
 
-    //Esta demas porque el tipo de vivienda se crea en la base de datos
-    
-//    public void crearTipoVivienda(TipoVivienda nueva) throws SQLException {
-//        query = "INSERT INTO venta VALUES(NULL,'" + nueva.getTipo() + "')";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-
     // Leer
-    // Por hacer... 
+    public List<Usuario> verUsuarios() throws SQLException {
+        query = "SELECT * FROM usuario";
+        List<Usuario> usuarios = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+
+        while (rs.next()) {
+            Usuario usu = new Usuario();
+            usu.setRun(rs.getString(1));
+            usu.setNombre(rs.getString(2));
+            usu.setAdministrador(rs.getBoolean(3));
+            usuarios.add(usu);
+        }
+        con.close();
+        return usuarios;
+    }
+
+    public List<Cliente> verClientes() throws SQLException {
+        query = "SELECT * FROM cliente";
+        List<Cliente> clientes = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+
+        while (rs.next()) {
+            Cliente cli = new Cliente();
+            cli.setRun(rs.getString(1));
+            cli.setNombre(rs.getString(2));
+            cli.setSueldo(rs.getInt(3));
+            clientes.add(cli);
+        }
+        con.close();
+        return clientes;
+    }
+
+    public List<Vivienda> verViviendas() throws SQLException {
+        query = "SELECT * FROM vivienda";
+        List<Vivienda> viviendas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+
+        while (rs.next()) {
+            Vivienda viv = new Vivienda();
+            viv.setDireccion(rs.getString(1));
+            viv.setCantPiezas(rs.getInt(2));
+            viv.setCantBanos(rs.getInt(3));
+            viv.setTipoVivienda(rs.getInt(4));
+            viv.setPrecio(rs.getInt(5));
+            viv.setNuevo(rs.getBoolean(6));
+            viviendas.add(viv);
+        }
+
+        con.close();
+        return viviendas;
+    }
+
+    public List<Venta> verVentas() throws SQLException {
+        query = "SELECT * FROM venta";
+        List<Venta> ventas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        
+        while(rs.next()){
+            Venta ven = new Venta();
+            ven.setIdRol(rs.getInt(1));
+            ven.setIdUsuario(rs.getInt(2));
+            ven.setIdCliente(rs.getInt(3));
+            ventas.add(ven);
+        }
+        
+        con.close();
+        return ventas;
+    }
+
     // Actualizar
-    
-    //Esta demas porque en ningun momento te pide que cambies los datos del usuario
-    
-//    public void updateUsuario(Usuario mod) throws SQLException {
-//        query = "UPDATE usuario SET nombre = '" + mod.getNombre()
-//                + "', administrador='" + mod.isAdministrador()
-//                + "' WHERE run = '" + mod.getRun() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-    
-    
     public void updateCliente(Cliente mod) throws SQLException {
         query = "UPDATE cliente SET nombre = '" + mod.getNombre()
                 + "', sueldo='" + mod.getSueldo()
@@ -102,73 +150,6 @@ public class Data {
         con.ejecutar(query);
         con.close();
     }
-    
-    //el tipo de vivienda no se puede updatear
-
-//    public void updateTipoVivienda(TipoVivienda mod) throws SQLException {
-//        query = "UPDATE tipoVivienda SET tipo = '" + mod.getTipo()
-//                + "' WHERE id = '" + mod.getId() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-
-    // Borrar 
-    //En ningun momento te piden borrar datos
-//    public void borrarUsuario(Usuario del) throws SQLException {
-//        query = "DELETE usuario WHERE run = '" + del.getRun() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-//
-//    public void borrarCliente(Cliente del) throws SQLException {
-//        query = "DELETE cliente WHERE run = '" + del.getRun() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-//
-//    public void borrarVivienda(Vivienda del) throws SQLException {
-//        query = "DELETE vivienda WHERE nrol = '" + del.getnDeRol() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-//
-//    public void borrarVenta(Venta del) throws SQLException {
-//        query = "DELETE venta WHERE id = '" + del.getId() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-//
-//    public void borrarTipoVivienda(TipoVivienda del) throws SQLException {
-//        query = "DELETE tipoVivienda WHERE id = '" + del.getId() + "'";
-//        con.ejecutar(query);
-//        con.close();
-//    }
-    
-    public List<Vivienda> getViviendas() throws SQLException {
-        query = "select * from vivienda";
-        List<Vivienda>viviendas = new ArrayList<>();
-        Vivienda v; 
-
-        rs = con.ejecutarSelect(query);
-        while (rs.next()) {
-            v = new Vivienda();
-            
-            v.setnDeRol(rs.getInt(1));
-            v.setDireccion(rs.getString(2));
-            v.setCantPiezas(rs.getInt(3));
-            v.setCantBanos(rs.getInt(4));
-            v.setTipoVivienda(rs.getInt(5));
-            v.setPrecio(rs.getInt(6));
-            v.isNuevo();
-            
-            viviendas.add(v);
-            
-        }
-        con.close();
-        return viviendas;
-    }
-    
-    
 
     // Existencia
     public int existeUsuario(String run) throws SQLException {
@@ -182,7 +163,6 @@ public class Data {
         }
 
         con.close();
-
         return resultado;
     }
 
@@ -197,7 +177,6 @@ public class Data {
         }
 
         con.close();
-
         return resultado;
     }
 
@@ -212,21 +191,58 @@ public class Data {
         }
 
         con.close();
-
         return resultado;
     }
 
     // Busqueda
-    public void buscarUsuario() throws SQLException {
+    public Usuario buscarUsuario(String run) throws SQLException {
+        query = "SELECT * FROM usuario WHERE run = '" + run + "'";
+        rs = con.ejecutarSelect(query);
+        Usuario usu = null;
 
+        while (rs.next()) {
+            usu = new Usuario();
+            usu.setRun(rs.getString(1));
+            usu.setNombre(rs.getString(2));
+            usu.setAdministrador(rs.getBoolean(3));
+        }
+
+        con.close();
+        return usu;
     }
 
-    public void buscarCliente() throws SQLException {
+    public Cliente buscarCliente(String run) throws SQLException {
+        query = "SELECT * FROM cliente WHERE run = '" + run + "'";
+        rs = con.ejecutarSelect(query);
+        Cliente cli = null;
 
+        while (rs.next()) {
+            cli = new Cliente();
+            cli.setRun(rs.getString(1));
+            cli.setNombre(rs.getString(2));
+            cli.setSueldo(rs.getInt(3));
+        }
+
+        con.close();
+        return cli;
     }
 
-    public void buscarVivienda() throws SQLException {
+    public Vivienda buscarVivienda(int rol) throws SQLException {
+        query = "SELECT * FROM vivienda WHERE nrol = '" + rol + "'";
+        rs = con.ejecutarSelect(query);
+        Vivienda viv = null;
 
+        while (rs.next()) {
+            viv = new Vivienda();
+            viv.setDireccion(rs.getString(1));
+            viv.setCantPiezas(rs.getInt(2));
+            viv.setCantBanos(rs.getInt(3));
+            viv.setTipoVivienda(rs.getInt(4));
+            viv.setPrecio(rs.getInt(5));
+            viv.setNuevo(rs.getBoolean(6));
+        }
+
+        con.close();
+        return viv;
     }
-
 }
