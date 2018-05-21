@@ -260,7 +260,7 @@ public class Data {
         int resultado = 0;
 
         if (rs.next()) {
-            resultado = rs.getInt(3);
+            resultado = rs.getInt(1);
         }
 
         con.close();

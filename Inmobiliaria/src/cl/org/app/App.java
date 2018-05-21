@@ -180,7 +180,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(132, 132, 132))
             .addGroup(frameVendedorLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(118, 118, 118)
                 .addComponent(lblVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
