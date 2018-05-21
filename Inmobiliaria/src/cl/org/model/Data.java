@@ -111,8 +111,8 @@ public class Data {
         query = "SELECT * FROM venta";
         List<Venta> ventas = new ArrayList<>();
         rs = con.ejecutarSelect(query);
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Venta ven = new Venta();
             ven.setFecha(rs.getInt(1));
             ven.setIdRol(rs.getInt(2));
@@ -120,7 +120,7 @@ public class Data {
             ven.setIdCliente(rs.getInt(4));
             ventas.add(ven);
         }
-        
+
         con.close();
         return ventas;
     }
@@ -251,5 +251,19 @@ public class Data {
 
         con.close();
         return viv;
+    }
+
+    public int verificarPersona(String run) throws SQLException {
+        query = "SELECT administrador FROM usuario WHERE run = '" + run + "'";
+        rs = con.ejecutarSelect(query);
+
+        int resultado = 0;
+
+        if (rs.next()) {
+            resultado = rs.getInt(3);
+        }
+
+        con.close();
+        return resultado;
     }
 }

@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class App extends javax.swing.JFrame {
 
     Data d;
-   
+
     public App() {
         try {
             d = new Data();
@@ -817,23 +817,31 @@ public class App extends javax.swing.JFrame {
     private void btnAceptarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarSesionActionPerformed
         try {
             String run;
-            
+
             run = txtRun.getText();
-            
-            int rutEncontrado = d.existeUsuario(run);
-            
-            if(run.isEmpty()){
-               JOptionPane.showMessageDialog(null, "Ingrese un RUN", "Casilla RUN vacía", JOptionPane.INFORMATION_MESSAGE);
-            
-            }else{
+
+            if (run.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Error", "Casilla RUN vacía.", JOptionPane.ERROR_MESSAGE);
+                txtRun.requestFocus();
+            }else if (d.existeUsuario(run) == 0) {
+                JOptionPane.showMessageDialog(null, "Error", "El RUN Ingresado no existe.", JOptionPane.ERROR_MESSAGE);
+                txtRun.requestFocus();
+            } else {
                 //Validar si es admin o no
-                
-                frameAdministrador.setVisible(false);
-                frameVendedor.setVisible(true);
+
+                int verif = d.verificarPersona(run);
+
+                if (verif == 1) {
+                    JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Administrador", JOptionPane.INFORMATION_MESSAGE);
+                    frameAdministrador.setVisible(true);
+                    frameVendedor.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Vendedor", JOptionPane.INFORMATION_MESSAGE);
+                    frameVendedor.setVisible(true);
+                    frameAdministrador.setVisible(false);
+                }
             }
-           
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -842,55 +850,52 @@ public class App extends javax.swing.JFrame {
     private void btnAceptarViviendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarViviendaActionPerformed
         try {
             Vivienda v = new Vivienda();
-            
-            
+
             v.setDireccion(txtDireccion.getText());
             v.setCantPiezas(Integer.parseInt(txtcantPiezas.getText()));
             v.setCantBanos(Integer.parseInt(txtCantBaños.getText()));
-            
+
             if (opCasa.isSelected()) {
                 v.setTipoVivienda(1);
             } else {
                 v.setTipoVivienda(2);
             }
-            
+
             v.setPrecio(Integer.parseInt(txtValorVivienda.getText()));
-            
-            if(opNueva.isSelected()){
+
+            if (opNueva.isSelected()) {
                 v.setNuevo(true);
-            }else{
+            } else {
                 v.setNuevo(false);
             }
-            
-            
+
             d.crearVivienda(v);
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this ,ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_btnAceptarViviendaActionPerformed
 
     private void btnAceptarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarVendedorActionPerformed
-                try {
+        try {
             Usuario u = new Usuario();
-            
-            
+
             u.setRun(txtRunVendedor.getText());
             u.setNombre(txtNombreVendedor.getText());
-            
+
             u.setAdministrador(false);
-            
+
             d.crearUsuario(u);
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this ,ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnAceptarVendedorActionPerformed
 
     private void txtSueldoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSueldoClienteActionPerformed
-        
+
     }//GEN-LAST:event_txtSueldoClienteActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -904,34 +909,34 @@ public class App extends javax.swing.JFrame {
     private void btnAceptarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarClienteActionPerformed
         try {
             Cliente cl = new Cliente();
-            
+
             cl.setRun(txtRunCliente.getText());
             cl.setNombre(txtNombreCliente.getText());
             cl.setSueldo(Integer.parseInt(txtSueldoCliente.getText()));
-            
+
             d.crearCliente(cl);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this ,ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
-        
+
     }//GEN-LAST:event_btnAceptarClienteActionPerformed
 
     private void btnAceptarCambiosAparienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCambiosAparienciaActionPerformed
         try {
             Properties prop = new Properties();
             prop.load(new FileReader("../cl.org.model/propierties.config"));
-            
-            String cb,cbt;
-            
+
+            String cb, cbt;
+
             cb = txtColorBotones.getText();
             cbt = txtColorTextoBotones.getText();
-            
+
             prop.put("Color Botones:", cb);
             prop.put("Color Texto Botones", cbt);
-            
+
             prop.setProperty("Color Botones:", cb);
             prop.setProperty("Color Texto Botones", cbt);
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -948,9 +953,9 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void tabviviendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabviviendasMouseClicked
-        if(evt.getClickCount()==2){
-         System.out.println("Se ha hecho doble click");
-       }
+        if (evt.getClickCount() == 2) {
+            System.out.println("Se ha hecho doble click");
+        }
     }//GEN-LAST:event_tabviviendasMouseClicked
 
     public static void main(String args[]) {
@@ -1086,5 +1091,4 @@ public class App extends javax.swing.JFrame {
 
     }
 
- 
 }

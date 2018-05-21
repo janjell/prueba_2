@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pabli/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/Data.java</file>
-            <file>file:/C:/Users/pabli/Desktop/prueba_2/Inmobiliaria/src/cl/org/app/App.java</file>
-            <file>file:/C:/Users/pabli/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/bd_inmobiliaria.sql</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/bd_inmobiliaria.sql</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/app/App.java</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/Cliente.java</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/Vivienda.java</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/Venta.java</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/Usuario.java</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/TipoVivienda.java</file>
+            <file>file:/C:/Users/Jorge%20A/Desktop/prueba_2/Inmobiliaria/src/cl/org/model/Data.java</file>
         </group>
     </open-files>
 </project-private>
