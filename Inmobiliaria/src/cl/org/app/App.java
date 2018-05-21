@@ -958,10 +958,14 @@ public class App extends javax.swing.JFrame {
                 if (verif == 1) {
                     JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Administrador", JOptionPane.INFORMATION_MESSAGE);
                     frameAdministrador.setVisible(true);
+                    frameAdministrador.setBounds(0, 0, 600, 500);
+                    frameAdministrador.setLocationRelativeTo(this);
                     frameVendedor.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Vendedor", JOptionPane.INFORMATION_MESSAGE);
                     frameVendedor.setVisible(true);
+                    frameVendedor.setBounds(0, 0, 600, 500);
+                    frameVendedor.setLocationRelativeTo(this);
                     frameAdministrador.setVisible(false);
                 }
             }
