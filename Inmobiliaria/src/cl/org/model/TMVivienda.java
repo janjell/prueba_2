@@ -29,16 +29,18 @@ public class TMVivienda implements TableModel{
                 return "Nº Rol";
             case 1:
                 return "Dirección";
-
             case 2:
-                return "Cantidad de Piezas";
+                return "Estado de la Casa";
 
             case 3:
-                return "Cantidad de Baños";
+                return "Cantidad de Piezas";
 
             case 4:
-                return "Tipo Vivienda";
+                return "Cantidad de Baños";
+
             case 5:
+                return "Tipo Vivienda";
+            case 6:
                 return "Valor";
             default:
                 return "Nueva";
@@ -64,21 +66,37 @@ public class TMVivienda implements TableModel{
                 return v.getnDeRol();
             case 1:
                 return v.getDireccion();
-
+                
             case 2:
-                return v.getCantPiezas();
+                    switch (v.getEstado()) {
+                        case 1:
+                            return "En Arriendo";
+                        case 2:
+                            return "Arrendada";
+                        case 3:
+                            return "Vendida";
+                        case 4:
+                            return "En Venta";
+                        case 5:
+                            return "Reservada";
+                        default:
+                            break;
+                    }
 
             case 3:
-                return v.getCantBanos();
+                return v.getCantPiezas();
 
             case 4:
+                return v.getCantBanos();
+
+            case 5:
                 if(v.getTipoVivienda() == 1){
                     return "Casa";
                 }else{
                     return "Departamento";
                 }
                 
-            case 5:
+            case 6:
                 return v.getPrecio();
             default:
                 if(v.isNuevo() == true){
