@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,8 +27,26 @@ import javax.swing.JOptionPane;
 public class App extends javax.swing.JFrame {
 
     Data d;
+    Logger logger = Logger.getLogger("Logs");
+    FileHandler fh;
 
     public App() {
+
+        try {
+            fh = new FileHandler("archivo.log", true);
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        fh.close();
+
+        logger.info("Inicio de Aplicación");
+
         try {
             d = new Data();
             initComponents();
@@ -963,8 +983,10 @@ public class App extends javax.swing.JFrame {
             if (run.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Error", "Casilla RUN vacía.", JOptionPane.ERROR_MESSAGE);
                 txtRun.requestFocus();
+                logger.info("Error de Ingreso: RUN Vacío.");
             } else if (d.existeUsuario(run) == 0) {
                 JOptionPane.showMessageDialog(null, "Error", "El RUN Ingresado no existe.", JOptionPane.ERROR_MESSAGE);
+                logger.info("Error de Ingreso: RUN Inexistente.");
                 txtRun.requestFocus();
             } else {
                 //Validar si es admin o no
@@ -978,19 +1000,23 @@ public class App extends javax.swing.JFrame {
                     frameAdministrador.setLocationRelativeTo(this);
                     frameVendedor.setVisible(false);
                     cargarEstados();
+                    logger.info("Login de Administrador.");
                 } else {
                     JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Vendedor", JOptionPane.INFORMATION_MESSAGE);
                     List<Usuario> u = d.verUsuarios();
-                    lblVendedor.setText("Nombre Vendedor"+u);
+                    lblVendedor.setText("Nombre Vendedor" + u);
                     frameVendedor.setVisible(true);
                     frameVendedor.setBounds(0, 0, 600, 500);
                     frameVendedor.setLocationRelativeTo(this);
                     frameAdministrador.setVisible(false);
+                    logger.info("Login de Vendedor");
+
                 }
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(App.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAceptarSesionActionPerformed
 
@@ -999,15 +1025,15 @@ public class App extends javax.swing.JFrame {
             Vivienda v = new Vivienda();
 
             v.setDireccion(txtDireccion.getText());
-            
-            Estado e = null ;
+
+            Estado e = null;
             //obtengo el valor del indice seleccionad
             int estado = cboxEstados.getSelectedIndex();
-            
+
             v.setEstado(estado);
-            
+
             v.setCantPiezas(Integer.parseInt(txtcantPiezas.getText()));
-            
+
             v.setCantBanos(Integer.parseInt(txtCantBaños.getText()));
 
             if (opCasa.isSelected()) {
@@ -1025,6 +1051,8 @@ public class App extends javax.swing.JFrame {
             }
 
             d.crearVivienda(v);
+
+            logger.info("Se crea una vivienda nueva.");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
@@ -1044,6 +1072,8 @@ public class App extends javax.swing.JFrame {
 
             d.crearUsuario(u);
 
+            logger.info("Se crea un usuario.");
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
@@ -1056,11 +1086,13 @@ public class App extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         frameCrearCliente.setVisible(true);
         frameCrearCliente.setBounds(550, 100, 300, 400);
+        logger.info("Ajuste de frame crear cliente.");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         frameApariencia.setVisible(true);
         frameApariencia.setBounds(100, 100, 600, 500);
+        logger.info("Ajuste de frame apariencia.");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnAceptarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarClienteActionPerformed
@@ -1072,6 +1104,9 @@ public class App extends javax.swing.JFrame {
             cl.setSueldo(Integer.parseInt(txtSueldoCliente.getText()));
 
             d.crearCliente(cl);
+
+            logger.info("Se crea cliente.");
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
@@ -1095,15 +1130,24 @@ public class App extends javax.swing.JFrame {
             prop.setProperty("Color Texto Botones", cbt);
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(App.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            logger.info("El archivo properties no existe.");
+
         } catch (IOException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(App.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            logger.info("¿ Error ?");
         }
+
+        logger.info("Configuración de Apariencia guardada.");
+
     }//GEN-LAST:event_btnAceptarCambiosAparienciaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         frameArrendarOVender.setVisible(true);
-        frameArrendarOVender.setBounds(100,100, 800, 450);
+        frameArrendarOVender.setBounds(100, 100, 800, 450);
+        logger.info("Ajuste de frame Arrendar o vender.");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
@@ -1119,41 +1163,49 @@ public class App extends javax.swing.JFrame {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         txtRun.setText("");
         txtRun.requestFocus();
+        logger.info("Borrado de textfield run.");
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnBorrarDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarDireccionActionPerformed
         txtDireccion.setText("");
         txtDireccion.requestFocus();
+        logger.info("Borrado de textfield dirección.");
     }//GEN-LAST:event_btnBorrarDireccionActionPerformed
 
     private void btnCantidadPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadPiezasActionPerformed
         txtcantPiezas.setText("");
         txtcantPiezas.requestFocus();
+        logger.info("Borrado de textfield piezas");
     }//GEN-LAST:event_btnCantidadPiezasActionPerformed
 
     private void btnCantidadBañosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadBañosActionPerformed
         txtCantBaños.setText("");
         txtCantBaños.requestFocus();
+        logger.info("Borrado de textfield cantidad de baños");
     }//GEN-LAST:event_btnCantidadBañosActionPerformed
 
     private void btnBorrarValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarValorActionPerformed
         txtValorVivienda.setText("");
         txtValorVivienda.requestFocus();
+        logger.info("Borrado de textfield valor de vivienda");
     }//GEN-LAST:event_btnBorrarValorActionPerformed
 
     private void btnBorrarRunClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarRunClienteActionPerformed
         txtRunCliente.setText("");
         txtRunCliente.requestFocus();
+        logger.info("Borrado de textfield run de cliente.");
     }//GEN-LAST:event_btnBorrarRunClienteActionPerformed
 
     private void btnBorrarNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarNombreClienteActionPerformed
         txtNombreCliente.setText("");
         txtNombreCliente.requestFocus();
+        logger.info("Borrado de textfield nombre de cliente.");
     }//GEN-LAST:event_btnBorrarNombreClienteActionPerformed
 
     private void btnborrarSueldoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarSueldoClienteActionPerformed
         txtSueldoCliente.setText("");
         txtSueldoCliente.requestFocus();
+        logger.info("Borrado de textfield sueldo de cliente");
     }//GEN-LAST:event_btnborrarSueldoClienteActionPerformed
 
     private void txtBuscarViviendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarViviendasActionPerformed
@@ -1163,11 +1215,13 @@ public class App extends javax.swing.JFrame {
     private void btnBorrarRunVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarRunVendedorActionPerformed
         txtRunVendedor.setText("");
         txtRunVendedor.requestFocus();
+        logger.info("Borrado de textfield run de vendedor");
     }//GEN-LAST:event_btnBorrarRunVendedorActionPerformed
 
     private void btnBorrarNombreVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarNombreVendedorActionPerformed
         txtNombreVendedor.setText("");
         txtNombreVendedor.requestFocus();
+        logger.info("Borrado de textfield nombre vendedor");
     }//GEN-LAST:event_btnBorrarNombreVendedorActionPerformed
 
     public static void main(String args[]) {
@@ -1181,16 +1235,24 @@ public class App extends javax.swing.JFrame {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1308,27 +1370,31 @@ public class App extends javax.swing.JFrame {
             List<Vivienda> viviendas = d.verViviendas();
             TMVivienda tabla = new TMVivienda(viviendas);
             tabviviendas.setModel(tabla);//nombre de la tabla  
+            logger.info("Se carga tabla viviendas.");
 
         } catch (SQLException ex) {
-            Logger.getLogger(Vivienda.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Vivienda.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-    private void cargarEstados(){
+
+    private void cargarEstados() {
         try {
             List<Estado> estados = d.getEstados();
-            
-            
+
             cboxEstados.removeAllItems();
-            
-            for(Estado e : estados){
+            logger.info("Se añaden item de estados.");
+
+            for (Estado e : estados) {
                 cboxEstados.addItem(e);
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(App.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
 
 }
