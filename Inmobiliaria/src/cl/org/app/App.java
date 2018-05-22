@@ -6,6 +6,7 @@ import cl.org.model.Estado;
 import cl.org.model.TMVivienda;
 import cl.org.model.Usuario;
 import cl.org.model.Vivienda;
+import cl.org.thread.HiloVerficador;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,6 +28,7 @@ import javax.swing.JOptionPane;
 public class App extends javax.swing.JFrame {
 
     Data d;
+    private HiloVerficador hilo;
     Logger logger = Logger.getLogger("Logs");
     FileHandler fh;
 
@@ -48,17 +50,22 @@ public class App extends javax.swing.JFrame {
         logger.info("Inicio de Aplicación");
 
         try {
+
+            hilo = new HiloVerficador();
+            hilo.start();
+
+            System.out.println(hilo.getId());
+            System.out.println(hilo.getState());
+
             d = new Data();
             initComponents();
             setLocationRelativeTo(null);
+
             //cambiarApariencia();
             cargarTablaViviendas();
+        } catch (SQLException | ClassNotFoundException ex) {
             cargarEstados();
-        } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     @SuppressWarnings("unchecked")
@@ -1007,7 +1014,7 @@ public class App extends javax.swing.JFrame {
                     lblVendedor.setText("Nombre Vendedor" + u);
                     frameVendedor.setVisible(true);
                     frameVendedor.setBounds(0, 0, 600, 500);
-                    frameVendedor.setLocationRelativeTo(this);
+                    frameVendedor.setLocationRelativeTo(null);
                     frameAdministrador.setVisible(false);
                     logger.info("Login de Vendedor");
 
@@ -1104,6 +1111,10 @@ public class App extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         frameApariencia.setVisible(true);
+//        frameApariencia.setLocationRelativeTo(this);
+//        frameApariencia.setBounds(0, 0, 500, 600);
+        System.out.println(hilo.getId());
+        System.out.println(hilo.getState());
         frameApariencia.setBounds(100, 100, 600, 500);
         logger.info("Ajuste de frame apariencia.");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -1133,8 +1144,9 @@ public class App extends javax.swing.JFrame {
 
     private void btnAceptarCambiosAparienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCambiosAparienciaActionPerformed
         try {
+            System.out.println(hilo.getId());
             Properties prop = new Properties();
-            prop.load(new FileReader("../cl.org.model/propierties.config"));
+            prop.load(new FileReader("archivo.properties"));
 
             String cb, cbt;
 
