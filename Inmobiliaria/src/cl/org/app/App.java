@@ -42,7 +42,7 @@ public class App extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         fh.close();
 
         logger.info("Inicio de Aplicación");
@@ -1018,6 +1018,8 @@ public class App extends javax.swing.JFrame {
             Logger.getLogger(App.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+
+        txtRun.setText("");
     }//GEN-LAST:event_btnAceptarSesionActionPerformed
 
     private void btnAceptarViviendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarViviendaActionPerformed
@@ -1058,6 +1060,13 @@ public class App extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex);
         }
 
+        txtRun.setText("");
+        txtDireccion.setText("");
+        txtcantPiezas.setText("");
+        txtCantBaños.setText("");
+        txtValorVivienda.setText("");
+        txtRun.requestFocus();
+
 
     }//GEN-LAST:event_btnAceptarViviendaActionPerformed
 
@@ -1077,6 +1086,10 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
+
+        txtRunVendedor.setText("");
+        txtNombreVendedor.setText("");
+        txtRunVendedor.requestFocus();
     }//GEN-LAST:event_btnAceptarVendedorActionPerformed
 
     private void txtSueldoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSueldoClienteActionPerformed
@@ -1110,6 +1123,11 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
+
+        txtRunCliente.setText("");
+        txtNombreCliente.setText("");
+        txtSueldoCliente.setText("");
+        txtRunVendedor.requestFocus();
 
     }//GEN-LAST:event_btnAceptarClienteActionPerformed
 
@@ -1176,6 +1194,7 @@ public class App extends javax.swing.JFrame {
         txtcantPiezas.setText("");
         txtcantPiezas.requestFocus();
         logger.info("Borrado de textfield piezas");
+
     }//GEN-LAST:event_btnCantidadPiezasActionPerformed
 
     private void btnCantidadBañosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadBañosActionPerformed
