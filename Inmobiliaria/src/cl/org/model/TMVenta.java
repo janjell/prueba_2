@@ -1,14 +1,78 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.org.model;
 
-/**
- *
- * @author pabli
- */
-public class TMVenta {
+import java.util.List;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+
+public class TMVenta implements TableModel{
+    
+    private List<Venta>ventas;
+    
+    public TMVenta(List<Venta> ventas) {
+        this.ventas = ventas;
+    }
+    
+    @Override
+    public int getRowCount() {
+        return ventas.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
+             case 0:
+                 return "Fecha";
+             case 1:
+                 return "Nº Rol";
+             case 2:
+                 return "Vendedor";
+
+             default:
+                 return "Cliente";
+        }
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return String.class;
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Venta ven = ventas.get(rowIndex);
+        
+        switch (columnIndex) {
+            case 0:
+                return ven.getFecha();
+            case 1:
+                return ven.getIdRol();
+            case 2:
+                return ven.getIdUsuario();
+            default:
+                return ven.getIdCliente();
+        }
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+    }
+
+    @Override
+    public void addTableModelListener(TableModelListener l) {
+    }
+
+    @Override
+    public void removeTableModelListener(TableModelListener l) {
+    }
     
 }
