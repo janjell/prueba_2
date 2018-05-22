@@ -34,12 +34,12 @@ public class Data {
 
     public void crearVivienda(Vivienda nueva) throws SQLException {
         query = "INSERT INTO vivienda VALUES(NULL,'" + nueva.getDireccion()
-                + "','" + nueva.getEstado()
-                + "','" + nueva.getCantPiezas()
-                + "','" + nueva.getCantBanos()
-                + "','" + nueva.getTipoVivienda()
-                + "','" + nueva.getPrecio()
-                + "', " + nueva.isNuevo() + ")";
+                + "'," + nueva.getEstado()
+                + "," + nueva.getCantPiezas()
+                + "," + nueva.getCantBanos()
+                + "," + nueva.getTipoVivienda()
+                + "," + nueva.getPrecio()
+                + ", " + nueva.isNuevo() + ")";
         con.ejecutar(query);
         con.close();
     }
@@ -69,28 +69,25 @@ public class Data {
         con.close();
         return usuarios;
     }
-    
+
     public List<Estado> getEstados() throws SQLException {
         query = "select * from estado";
         List<Estado> estados = new ArrayList<>();
-     
+
         rs = con.ejecutarSelect(query);
-      
         while (rs.next()) {
-           Estado e = new Estado();
-            
+            Estado e = new Estado();
+
             e.setId(rs.getInt(1));
             e.setDescripcion(rs.getString(2));
             estados.add(e);
-            
+
         }
         con.close();
         return estados;
-        
+
     }
-    
-    
-    
+
     public List<Cliente> verClientes() throws SQLException {
         query = "SELECT * FROM cliente";
         List<Cliente> clientes = new ArrayList<>();
@@ -112,10 +109,10 @@ public class Data {
         List<Vivienda> viviendas = new ArrayList<>();
         rs = con.ejecutarSelect(query);
         Vivienda viv;
-        
+
         while (rs.next()) {
             viv = new Vivienda();
-            
+
             viv.setnDeRol(rs.getInt(1));
             viv.setDireccion(rs.getString(2));
             viv.setEstado(rs.getInt(3));

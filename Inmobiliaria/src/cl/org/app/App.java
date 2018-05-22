@@ -44,7 +44,7 @@ public class App extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         fh.close();
 
         logger.info("Inicio de Aplicación");
@@ -1084,6 +1084,8 @@ public class App extends javax.swing.JFrame {
                 }
             }
 
+            txtRun.setText("");
+
         } catch (SQLException ex) {
             Logger.getLogger(App.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -1095,12 +1097,12 @@ public class App extends javax.swing.JFrame {
             Vivienda v = new Vivienda();
 
             v.setDireccion(txtDireccion.getText());
-
             Estado e = null;
             //obtengo el valor del indice seleccionad
             int estado = cboxEstados.getSelectedIndex();
-
+ 
             v.setEstado(estado);
+            System.out.println("estado:" + estado);
 
             v.setCantPiezas(Integer.parseInt(txtcantPiezas.getText()));
 
@@ -1124,6 +1126,13 @@ public class App extends javax.swing.JFrame {
 
             logger.info("Se crea una vivienda nueva.");
 
+            txtRun.setText("");
+            txtDireccion.setText("");
+            txtcantPiezas.setText("");
+            txtCantBaños.setText("");
+            txtValorVivienda.setText("");
+            txtRun.requestFocus();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
@@ -1143,6 +1152,10 @@ public class App extends javax.swing.JFrame {
             d.crearUsuario(u);
 
             logger.info("Se crea un usuario.");
+
+            txtRunVendedor.setText("");
+            txtNombreVendedor.setText("");
+            txtRunVendedor.requestFocus();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
@@ -1177,9 +1190,15 @@ public class App extends javax.swing.JFrame {
 
             logger.info("Se crea cliente.");
 
+            txtRunCliente.setText("");
+            txtNombreCliente.setText("");
+            txtSueldoCliente.setText("");
+            txtRunVendedor.requestFocus();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
+
 
     }//GEN-LAST:event_btnAceptarClienteActionPerformed
 
@@ -1464,8 +1483,8 @@ public class App extends javax.swing.JFrame {
         }
 
     }
-    
-    private void cargarTblventas(){
+
+    private void cargarTblventas() {
         try {
             List<Venta> ventas = d.verVentas();
             TMVenta model = new TMVenta(ventas);
@@ -1479,12 +1498,10 @@ public class App extends javax.swing.JFrame {
     private void cargarEstados() {
         try {
             List<Estado> estados = d.getEstados();
-
             cboxEstados.removeAllItems();
-            logger.info("Se añaden item de estados.");
-
             for (Estado e : estados) {
                 cboxEstados.addItem(e);
+                logger.info("Se añaden item de estados.");
 
             }
         } catch (SQLException ex) {
