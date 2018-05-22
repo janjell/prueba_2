@@ -1051,11 +1051,11 @@ public class App extends javax.swing.JFrame {
             run = txtRun.getText();
 
             if (run.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Error", "Casilla RUN vacía.", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Casilla RUN vacía.", "Error", JOptionPane.ERROR_MESSAGE);
                 txtRun.requestFocus();
                 logger.info("Error de Ingreso: RUN Vacío.");
             } else if (d.existeUsuario(run) == 0) {
-                JOptionPane.showMessageDialog(null, "Error", "El RUN Ingresado no existe.", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El RUN Ingresado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
                 logger.info("Error de Ingreso: RUN Inexistente.");
                 txtRun.requestFocus();
             } else {
@@ -1064,7 +1064,7 @@ public class App extends javax.swing.JFrame {
                 int verif = d.verificarPersona(run);
 
                 if (verif == 1) {
-                    JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Administrador", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Bienvenido Administrador", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     frameAdministrador.setVisible(true);
                     frameAdministrador.setBounds(0, 0, 600, 500);
                     frameAdministrador.setLocationRelativeTo(this);
@@ -1072,7 +1072,7 @@ public class App extends javax.swing.JFrame {
                     cargarEstados();
                     logger.info("Login de Administrador.");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Vendedor", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Bienvenido Vendedor", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     List<Usuario> u = d.verUsuarios();
                     lblVendedor.setText("Nombre Vendedor" + u);
                     frameVendedor.setVisible(true);

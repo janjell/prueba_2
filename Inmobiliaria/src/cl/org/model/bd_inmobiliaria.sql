@@ -54,8 +54,7 @@ CREATE TABLE cliente(
     run VARCHAR(20) UNIQUE,
     nombre VARCHAR(200),
     sueldo int
-); --select * from cliente;
-
+); -- select * from cliente;
 
 
 CREATE TABLE venta(
@@ -65,6 +64,14 @@ CREATE TABLE venta(
     usuario_fk INT REFERENCES usuario(id),
     cliente_fk INT REFERENCES cliente(id)
 ); -- select * from venta;
+
+CREATE TABLE log(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    registro VARCHAR(200),
+    fecha DATETIME,
+    run VARCHAR(20),
+    nombre VARCHAR(200)
+); -- SELECT * FROM log;
 
 -- select venta.rol_fk as 'Numero de Rol' ,venta.usuario_fk as 'Usuario' ,venta.cliente_fk as 'Cliente'
 -- from venta ,usuario ,vivienda, cliente
