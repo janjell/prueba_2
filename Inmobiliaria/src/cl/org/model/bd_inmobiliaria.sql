@@ -20,6 +20,10 @@ INSERT INTO estado VALUES(NULL,'Vendida');
 INSERT INTO estado VALUES(NULL,'En Venta');
 INSERT INTO estado VALUES(NULL,'Reservada');
 
+select estado.descripcion from estado
+
+select * from estado;
+
 CREATE TABLE vivienda(
     nrol INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
     direccion VARCHAR(200),
@@ -33,6 +37,7 @@ CREATE TABLE vivienda(
     FOREIGN KEY(estado) REFERENCES estado(id)
 ); -- select * from vivienda;
 
+insert into vivienda values(null,'psj3',1,2,3,1,500,true);
 
 
 CREATE TABLE usuario(
@@ -61,11 +66,6 @@ CREATE TABLE venta(
     cliente_fk INT REFERENCES cliente(id)
 ); -- select * from venta;
 
-insert into venta values(null,1,1,1);
-insert into venta values(null,2,1,1);
-
-
-
 -- select venta.rol_fk as 'Numero de Rol' ,venta.usuario_fk as 'Usuario' ,venta.cliente_fk as 'Cliente'
 -- from venta ,usuario ,vivienda, cliente
 -- where venta.rol_fk = vivienda.nrol and venta.usuario_fk = usuario.id
@@ -75,3 +75,5 @@ insert into venta values(null,2,1,1);
 -- 1 = admin - 0 = vendedor
 INSERT INTO usuario VALUES(NULL, '11-1', 'admin',1);
 INSERT INTO usuario VALUES(NULL, '22-2', 'vendedor',0);
+
+select * from usuario
