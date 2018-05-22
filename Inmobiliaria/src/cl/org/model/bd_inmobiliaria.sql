@@ -56,14 +56,15 @@ CREATE TABLE cliente(
     sueldo int
 ); -- select * from cliente;
 
-
 CREATE TABLE venta(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    fecha DATETIME,
+    fecha DATE,
     rol_fk INT REFERENCES vivienda(nrol),
     usuario_fk INT REFERENCES usuario(id),
     cliente_fk INT REFERENCES cliente(id)
 ); -- select * from venta;
+
+insert into venta values(null,NOW(),1,1,1);
 
 CREATE TABLE log(
     id INT AUTO_INCREMENT PRIMARY KEY,

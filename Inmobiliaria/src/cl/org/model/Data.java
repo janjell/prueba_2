@@ -129,16 +129,18 @@ public class Data {
     }
 
     public List<Venta> verVentas() throws SQLException {
-        query = "SELECT * FROM venta";
+        query = "select * from venta";
         List<Venta> ventas = new ArrayList<>();
         rs = con.ejecutarSelect(query);
-
+        Venta ven;
         while (rs.next()) {
-            Venta ven = new Venta();
-            ven.setFecha(rs.getInt(1));
-            ven.setIdRol(rs.getInt(2));
-            ven.setIdUsuario(rs.getInt(3));
-            ven.setIdCliente(rs.getInt(4));
+            ven = new Venta();
+            
+            ven.setId(rs.getInt(1));
+            ven.setFecha(rs.getString(2));
+            ven.setIdRol(rs.getInt(3));
+            ven.setIdUsuario(rs.getInt(4));
+            ven.setIdCliente(rs.getInt(5));
             ventas.add(ven);
         }
 

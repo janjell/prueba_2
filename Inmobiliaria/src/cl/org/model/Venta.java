@@ -3,7 +3,7 @@ package cl.org.model;
 public class Venta {
 
     private int id;
-    private int fecha;
+    private String fecha;
     private int idRol;
     private int idUsuario;
     private int idCliente;
@@ -11,7 +11,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int id, int fecha, int idRol, int idUsuario, int idCliente) {
+    public Venta(int id, String fecha, int idRol, int idUsuario, int idCliente) {
         this.id = id;
         this.fecha = fecha;
         this.idRol = idRol;
@@ -27,11 +27,11 @@ public class Venta {
         this.id = id;
     }
 
-    public int getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(int fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

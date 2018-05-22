@@ -19,7 +19,7 @@ public class TMVenta implements TableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
