@@ -5,6 +5,7 @@ import cl.org.model.Data;
 import cl.org.model.TMVivienda;
 import cl.org.model.Usuario;
 import cl.org.model.Vivienda;
+import cl.org.thread.HiloVerficador;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,17 +25,24 @@ import javax.swing.JOptionPane;
 public class App extends javax.swing.JFrame {
 
     Data d;
+    private HiloVerficador hilo;
 
     public App() {
         try {
+
+            hilo = new HiloVerficador();
+            hilo.start();
+
+            System.out.println(hilo.getId());
+            System.out.println(hilo.getState());
+
             d = new Data();
             initComponents();
             setLocationRelativeTo(null);
+
             //cambiarApariencia();
             cargarTablaViviendas();
-        } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -823,7 +831,7 @@ public class App extends javax.swing.JFrame {
             if (run.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Error", "Casilla RUN vacía.", JOptionPane.ERROR_MESSAGE);
                 txtRun.requestFocus();
-            }else if (d.existeUsuario(run) == 0) {
+            } else if (d.existeUsuario(run) == 0) {
                 JOptionPane.showMessageDialog(null, "Error", "El RUN Ingresado no existe.", JOptionPane.ERROR_MESSAGE);
                 txtRun.requestFocus();
             } else {
@@ -841,7 +849,7 @@ public class App extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Éxito", "Bienvenido Vendedor", JOptionPane.INFORMATION_MESSAGE);
                     frameVendedor.setVisible(true);
                     frameVendedor.setBounds(0, 0, 600, 500);
-                    frameVendedor.setLocationRelativeTo(this);
+                    frameVendedor.setLocationRelativeTo(null);
                     frameAdministrador.setVisible(false);
                 }
             }
@@ -908,6 +916,10 @@ public class App extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         frameApariencia.setVisible(true);
+        frameApariencia.setLocationRelativeTo(this);
+        frameApariencia.setBounds(0, 0, 500, 600);
+        System.out.println(hilo.getId());
+        System.out.println(hilo.getState());
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnAceptarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarClienteActionPerformed
@@ -927,8 +939,9 @@ public class App extends javax.swing.JFrame {
 
     private void btnAceptarCambiosAparienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCambiosAparienciaActionPerformed
         try {
+            System.out.println(hilo.getId());
             Properties prop = new Properties();
-            prop.load(new FileReader("../cl.org.model/propierties.config"));
+            prop.load(new FileReader("archivo.properties"));
 
             String cb, cbt;
 
