@@ -11,6 +11,10 @@ public class TMVivienda implements TableModel{
     public TMVivienda(List<Vivienda> viviendas) {
         this.viviendas = viviendas;
     }
+    
+    public Vivienda getViviendas(int i) {
+        return viviendas.get(i);
+    }
 
     @Override
     public int getRowCount() {
@@ -70,13 +74,13 @@ public class TMVivienda implements TableModel{
             case 2:
                     switch (v.getEstado()) {
                         case 1:
-                            return "En Arriendo";
-                        case 2:
                             return "Arrendada";
-                        case 3:
+                        case 2:
                             return "Vendida";
-                        case 4:
+                        case 3:
                             return "En Venta";
+                        case 4:
+                            return "En Arriendo";
                         case 5:
                             return "Reservada";
                         default:

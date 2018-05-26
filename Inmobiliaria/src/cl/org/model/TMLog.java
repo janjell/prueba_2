@@ -26,15 +26,14 @@ public class TMLog implements TableModel {
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return "Fecha";
-            case 1:
                 return "Registro";
+            case 1:
+                return "Fecha";
             case 2:
                 return "RUN de Usuario";
-            case 3:
-                return "Nombre de Usuario";
             default:
-                return "Vacío";
+                return "Nombre de Usuario";
+            
         }
     }
 
@@ -53,15 +52,13 @@ public class TMLog implements TableModel {
         Log reg = logs.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return reg.getFecha();
-            case 1:
                 return reg.getRegistro();
+            case 1:
+                return reg.getFecha();
             case 2:
                 return reg.getRun();
-            case 3:
-                return reg.getNombre();
             default:
-                return "vacio";
+                return reg.getNombre();
         }
     }
 

@@ -127,6 +127,110 @@ public class Data {
         con.close();
         return viviendas;
     }
+    
+    //Viviendas Arrendadas y vendidas
+    public List<Vivienda> verViviendasArrendadasyVendidas() throws SQLException {
+        query = "select * from vivienda where vivienda.estado between 1 and 2";
+        List<Vivienda> viviendas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Vivienda viv;
+
+        while (rs.next()) {
+            viv = new Vivienda();
+
+            viv.setnDeRol(rs.getInt(1));
+            viv.setDireccion(rs.getString(2));
+            viv.setEstado(rs.getInt(3));
+            viv.setCantPiezas(rs.getInt(4));
+            viv.setCantBanos(rs.getInt(5));
+            viv.setTipoVivienda(rs.getInt(6));
+            viv.setPrecio(rs.getInt(7));
+            viv.setNuevo(rs.getBoolean(8));
+            viviendas.add(viv);
+        }
+
+        con.close();
+        return viviendas;
+    }
+    
+    //viviendas Para arrendar o vender
+    public List<Vivienda> verViviendasParaArrendarOvender() throws SQLException {
+        query = "select * from vivienda where vivienda.estado between 3 and 4";
+        List<Vivienda> viviendas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Vivienda viv;
+
+        while (rs.next()) {
+            viv = new Vivienda();
+
+            viv.setnDeRol(rs.getInt(1));
+            viv.setDireccion(rs.getString(2));
+            viv.setEstado(rs.getInt(3));
+            viv.setCantPiezas(rs.getInt(4));
+            viv.setCantBanos(rs.getInt(5));
+            viv.setTipoVivienda(rs.getInt(6));
+            viv.setPrecio(rs.getInt(7));
+            viv.setNuevo(rs.getBoolean(8));
+            viviendas.add(viv);
+        }
+
+        con.close();
+        return viviendas;
+    }
+    
+    
+    
+    //desc
+        public List<Vivienda> verViviendasPrecioDesc() throws SQLException {
+        query = "select * from vivienda where vivienda.estado between 3 and 4 order by vivienda.precio desc";
+        List<Vivienda> viviendas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Vivienda viv;
+
+        while (rs.next()) {
+            viv = new Vivienda();
+
+            viv.setnDeRol(rs.getInt(1));
+            viv.setDireccion(rs.getString(2));
+            viv.setEstado(rs.getInt(3));
+            viv.setCantPiezas(rs.getInt(4));
+            viv.setCantBanos(rs.getInt(5));
+            viv.setTipoVivienda(rs.getInt(6));
+            viv.setPrecio(rs.getInt(7));
+            viv.setNuevo(rs.getBoolean(8));
+            viviendas.add(viv);
+        }
+
+        con.close();
+        return viviendas;
+    }
+        
+       //asc 
+     public List<Vivienda> verViviendasPrecioAsc() throws SQLException {
+        query = "select * from vivienda where vivienda.estado between 3 and 4 order by vivienda.precio asc";
+        List<Vivienda> viviendas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Vivienda viv;
+
+        while (rs.next()) {
+            viv = new Vivienda();
+
+            viv.setnDeRol(rs.getInt(1));
+            viv.setDireccion(rs.getString(2));
+            viv.setEstado(rs.getInt(3));
+            viv.setCantPiezas(rs.getInt(4));
+            viv.setCantBanos(rs.getInt(5));
+            viv.setTipoVivienda(rs.getInt(6));
+            viv.setPrecio(rs.getInt(7));
+            viv.setNuevo(rs.getBoolean(8));
+            viviendas.add(viv);
+        }
+
+        con.close();
+        return viviendas;
+    }
+    
+    
 
     public List<Venta> verVentas() throws SQLException {
         query = "select * from venta";
@@ -147,6 +251,52 @@ public class Data {
         con.close();
         return ventas;
     }
+    
+    public List<Log> getLog() throws SQLException {
+        query = "SELECT * FROM log";
+        List<Log> historial = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+
+        while (rs.next()) {
+            Log l = new Log();
+            
+            l.setId(rs.getInt(1));
+            l.setRegistro(rs.getString(2));
+            l.setFecha(rs.getString(3));
+            l.setRun(rs.getString(4));
+            l.setNombre(rs.getString(5));
+            
+            historial.add(l);
+        }
+        con.close();
+        return historial;
+    }
+    
+    
+    //rescatar nombre del vendedor por su rut
+    //NO FUNCIONA
+    public Usuario getUsuarioNombre(String rut) throws SQLException {
+        query = "select usuario.nombre from usuario where usuario.run = "+rut;
+        System.out.println("skajdasd"+query);
+        //List<Usuario> user = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Usuario u = null ;
+        while (rs.next()) {
+           
+            System.out.println("Entra al if");
+            u.setNombre(rs.getString(1));
+            System.out.println("sdasda"+u);
+            //user.add(u);
+        }
+        con.close();
+        return u;
+    }
+    
+    
+    
+    
+    
+    
 
     // Actualizar
     public void updateCliente(Cliente mod) throws SQLException {
