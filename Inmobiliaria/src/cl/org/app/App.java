@@ -72,8 +72,22 @@ public class App extends javax.swing.JFrame {
     private void initComponents() {
 
         frameVendedor = new javax.swing.JFrame();
-        lblVendedor = new javax.swing.JLabel();
-        lblPerfil = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel11 = new javax.swing.JPanel();
+        lblNombreC = new javax.swing.JLabel();
+        lblRunC = new javax.swing.JLabel();
+        lblSueldoC = new javax.swing.JLabel();
+        txtNombreC = new javax.swing.JTextField();
+        txtRunC = new javax.swing.JTextField();
+        txtSueldoC = new javax.swing.JTextField();
+        btnAceptarRegC = new javax.swing.JButton();
+        btnLimpiarNombreC = new javax.swing.JButton();
+        btnLimpiarRunC = new javax.swing.JButton();
+        btnLimpiarSueldoC = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -177,7 +191,147 @@ public class App extends javax.swing.JFrame {
         txtRun = new javax.swing.JTextField();
         btnBorrar = new javax.swing.JButton();
 
-        lblPerfil.setText("Perfil");
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblNombreC.setText("Nombre:");
+
+        lblRunC.setText("RUN:");
+
+        lblSueldoC.setText("Sueldo:");
+
+        btnAceptarRegC.setText("Aceptar");
+        btnAceptarRegC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarRegCActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarNombreC.setText("Limp");
+        btnLimpiarNombreC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarNombreCActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarRunC.setText("Limp");
+        btnLimpiarRunC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarRunCActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarSueldoC.setText("Limp");
+        btnLimpiarSueldoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarSueldoCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAceptarRegC))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(lblSueldoC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtSueldoC, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(lblNombreC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(lblRunC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRunC, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLimpiarRunC)
+                    .addComponent(btnLimpiarNombreC)
+                    .addComponent(btnLimpiarSueldoC))
+                .addGap(79, 79, 79))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreC)
+                    .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiarNombreC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRunC)
+                    .addComponent(txtRunC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiarRunC))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSueldoC)
+                    .addComponent(txtSueldoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiarSueldoC))
+                .addGap(18, 18, 18)
+                .addComponent(btnAceptarRegC)
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        jTabbedPane4.addTab("Crear Cliente", jPanel11);
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 224, Short.MAX_VALUE)
+        );
+
+        jTabbedPane4.addTab("Buscar Vivienda", jPanel19);
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 224, Short.MAX_VALUE)
+        );
+
+        jTabbedPane4.addTab("Arriendar Vivienda", jPanel20);
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 469, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 224, Short.MAX_VALUE)
+        );
+
+        jTabbedPane4.addTab("Vender Vivienda", jPanel21);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane4)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane4)
+        );
 
         jMenu1.setText("Menú");
 
@@ -220,23 +374,17 @@ public class App extends javax.swing.JFrame {
         frameVendedor.getContentPane().setLayout(frameVendedorLayout);
         frameVendedorLayout.setHorizontalGroup(
             frameVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameVendedorLayout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
-                .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
             .addGroup(frameVendedorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         frameVendedorLayout.setVerticalGroup(
             frameVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frameVendedorLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(lblVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrador"));
@@ -1181,8 +1329,8 @@ public class App extends javax.swing.JFrame {
                     
                     Usuario u;
                     u = d.getUsuarioNombre(run);
-                    lblPerfil.setText(run);
-                    lblVendedor.setText("Vendedor: " +d.getUsuarioNombre(run));
+//                    lblPerfil.setText(run);
+//                    lblVendedor.setText("Vendedor: " +d.getUsuarioNombre(run));
                     
                     frameVendedor.setVisible(true);
                     frameVendedor.setBounds(0, 0, 600, 500);
@@ -1463,6 +1611,44 @@ public class App extends javax.swing.JFrame {
         cargarTablaPrecioDesc();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void btnAceptarRegCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegCActionPerformed
+        try {
+            Cliente cli = new Cliente();
+
+            cli.setRun(txtRunC.getText());
+            cli.setNombre(txtNombreC.getText());
+            cli.setSueldo(Integer.parseInt(txtSueldoC.getText()));
+
+            d.crearCliente(cli);
+            
+            JOptionPane.showMessageDialog(null, "Cliente Creado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            logger.info("Un vendedor creo un cliente.");
+
+            txtRunC.setText("");
+            txtNombreC.setText("");
+            txtSueldoC.setText("");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }//GEN-LAST:event_btnAceptarRegCActionPerformed
+
+    private void btnLimpiarNombreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarNombreCActionPerformed
+        txtNombreC.setText("");
+        txtNombreC.requestFocus();
+    }//GEN-LAST:event_btnLimpiarNombreCActionPerformed
+
+    private void btnLimpiarRunCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarRunCActionPerformed
+        txtRunC.setText("");
+        txtRunC.requestFocus();
+    }//GEN-LAST:event_btnLimpiarRunCActionPerformed
+
+    private void btnLimpiarSueldoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSueldoCActionPerformed
+        txtSueldoC.setText("");
+        txtSueldoC.requestFocus();
+    }//GEN-LAST:event_btnLimpiarSueldoCActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1510,6 +1696,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgTipovivienda;
     private javax.swing.JButton btnAceptarCambiosApariencia;
     private javax.swing.JButton btnAceptarCliente;
+    private javax.swing.JButton btnAceptarRegC;
     private javax.swing.JButton btnAceptarSesion;
     private javax.swing.JButton btnAceptarVendedor;
     private javax.swing.JButton btnAceptarVivienda;
@@ -1522,6 +1709,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrarValor;
     private javax.swing.JButton btnCantidadBaños;
     private javax.swing.JButton btnCantidadPiezas;
+    private javax.swing.JButton btnLimpiarNombreC;
+    private javax.swing.JButton btnLimpiarRunC;
+    private javax.swing.JButton btnLimpiarSueldoC;
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnVolverVentas;
     private javax.swing.JButton btnborrarSueldoCliente;
@@ -1563,6 +1753,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -1570,7 +1762,10 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -1585,9 +1780,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JLabel lblPerfil;
+    private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JLabel lblNombreC;
     private javax.swing.JLabel lblRun;
-    private javax.swing.JLabel lblVendedor;
+    private javax.swing.JLabel lblRunC;
+    private javax.swing.JLabel lblSueldoC;
     private javax.swing.JRadioButton opCasa;
     private javax.swing.JRadioButton opDepartamento;
     private javax.swing.JRadioButton opNueva;
@@ -1601,11 +1798,14 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtColorBotones;
     private javax.swing.JTextField txtColorTextoBotones;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtNombreC;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreVendedor;
     private javax.swing.JTextField txtRun;
+    private javax.swing.JTextField txtRunC;
     private javax.swing.JTextField txtRunCliente;
     private javax.swing.JTextField txtRunVendedor;
+    private javax.swing.JTextField txtSueldoC;
     private javax.swing.JTextField txtSueldoCliente;
     private javax.swing.JTextField txtValorVivienda;
     private javax.swing.JTextField txtcantPiezas;

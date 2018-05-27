@@ -29,9 +29,9 @@ INSERT INTO estado VALUES(NULL,'En Venta');
 INSERT INTO estado VALUES(NULL,'En Arriendo');
 INSERT INTO estado VALUES(NULL,'Reservada');
 
---select estado.descripcion from estado;
+-- select estado.descripcion from estado;
 
-select * from vivienda where vivienda.estado between 2 and 3 order by vivienda.precio desc
+select * from vivienda where vivienda.estado between 2 and 3 order by vivienda.precio desc;
 
 select * from estado;
 
@@ -106,19 +106,16 @@ INSERT INTO usuario VALUES(NULL, '11-1', 'admin',1);
 INSERT INTO usuario VALUES(NULL, '22-2', 'vendedor',0);
 INSERT INTO usuario VALUES(NULL, '66-6', 'Tami',0);
 
---Nombre del vendedor
+-- Nombre del vendedor
 select usuario.nombre from usuario where usuario.run = '66-6';
 
 
---Lista de viviendas Arrendadas o Vendidas
+-- Lista de viviendas Arrendadas o Vendidas
 select * from vivienda where vivienda.estado between 3 and 4; 
-
-
-
 
 select * from usuario
 
---Creacion de trigger para tabla log
+-- Creacion de trigger para tabla log
 
 DELIMITER $$
 CREATE TRIGGER log
@@ -128,3 +125,38 @@ BEGIN
     insert into log values (null,'Se ha creado un cliente',NOW(),'77-7','Pablo');
 end $$
 DELIMITER ;
+
+-- Procedimiento para agregar clientes + inserción en log (Es provisional)
+
+DELIMITER //
+CREATE PROCEDURE crear_cliente (run_ve VARCHAR(20), nombre_ve VARCHAR(200),run_cl VARCHAR(20),nombre_cl VARCHAR(200), sueldo INT)
+BEGIN
+	DECLARE existe_run INT;
+    
+    SET existe_run = (SELECT COUNT(*) FROM cliente WHERE run = run);    
+    
+    IF existe_run = 0 THEN
+    
+    INSERT INTO cliente VALUES(NULL,run,nombre,sueldo);
+    INSERT INTO log VALUES(NULL,'Cliente Registrado',NOW(),run_ve,nombre_ve);
+        
+    END IF;
+END //
+DELIMITER ;
+
+-- Vista para mostrar ventas (No se puede mostrar usuario (Tabla con mismo nombre -> cli = usu)
+-- ¿Cambiamos el campo? 
+
+CREATE VIEW vista_ventas AS
+SELECT
+	ven.id,
+    ven.fecha,
+    viv.nrol,
+    -- usu.nombre,
+    cli.nombre
+FROM venta ven
+JOIN vivienda viv ON ven.rol_fk = viv.nrol
+-- JOIN usuario usu ON ven.usuario_fk = usu.id
+JOIN cliente cli ON ven.cliente_fk = cli.id;
+
+SELECT * FROM vista_ventas;
