@@ -274,30 +274,36 @@ public class Data {
     
     
     //rescatar nombre del vendedor por su rut
-    //NO FUNCIONA
-    public Usuario getUsuarioNombre(String rut) throws SQLException {
-        query = "select usuario.nombre from usuario where usuario.run = "+rut;
-        System.out.println("skajdasd"+query);
-        //List<Usuario> user = new ArrayList<>();
+    public Usuario getUsuarioNombre(String run) throws SQLException {
+        query = "SELECT nombre FROM usuario WHERE run = '" + run + "'";
         rs = con.ejecutarSelect(query);
-        Usuario u = null ;
+        Usuario usu = null;
+
         while (rs.next()) {
-           
-            System.out.println("Entra al if");
-            u.setNombre(rs.getString(1));
-            System.out.println("sdasda"+u);
-            //user.add(u);
+            usu = new Usuario();
+            usu.setNombre(rs.getString(1));
         }
+
         con.close();
-        return u;
+        return usu;
     }
     
-    
-    
-    
-    
-    
+    // Obtiene nrol por direccion
+        public Vivienda getNumeroRol(String direccion) throws SQLException {
+        query = "SELECT nrol FROM vivienda WHERE direccion = '" + direccion + "'";
+        rs = con.ejecutarSelect(query);
+        Vivienda viv = null;
 
+        while (rs.next()) {
+            viv = new Vivienda();
+            viv.setnDeRol(rs.getInt(1));
+        }
+
+        con.close();
+        return viv;
+    }
+
+    
     // Actualizar
     public void updateCliente(Cliente mod) throws SQLException {
         query = "UPDATE cliente SET nombre = '" + mod.getNombre()
@@ -326,6 +332,12 @@ public class Data {
                 + "', usuario_fk='" + mod.getIdUsuario()
                 + "', cliente_fk='" + mod.getIdCliente()
                 + "' WHERE id = '" + mod.getId() + "'";
+        con.ejecutar(query);
+        con.close();
+    }
+    
+    public void updateEstadoVivienda(int estado, int nrol) throws SQLException {
+        query = "UPDATE vivienda SET estado='" + estado + "' WHERE nrol = '" + nrol + "'";
         con.ejecutar(query);
         con.close();
     }

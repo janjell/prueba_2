@@ -91,9 +91,12 @@ public class Vivienda {
 
     @Override
     public String toString() {
-        return "Vivienda{" + "nDeRol=" + nDeRol + ", direccion=" + direccion + ", estado=" + estado + ", cantPiezas=" + cantPiezas + ", cantBanos=" + cantBanos + ", tipoVivienda=" + tipoVivienda + ", precio=" + precio + ", nuevo=" + nuevo + '}';
+        return direccion;
     }
     
-    
+//    @Override
+//    public String toString() {
+//        return "Vivienda{" + "nDeRol=" + nDeRol + ", direccion=" + direccion + ", estado=" + estado + ", cantPiezas=" + cantPiezas + ", cantBanos=" + cantBanos + ", tipoVivienda=" + tipoVivienda + ", precio=" + precio + ", nuevo=" + nuevo + '}';
+//    } 
     
 }

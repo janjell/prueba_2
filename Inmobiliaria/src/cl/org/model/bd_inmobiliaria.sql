@@ -160,3 +160,5 @@ JOIN vivienda viv ON ven.rol_fk = viv.nrol
 JOIN cliente cli ON ven.cliente_fk = cli.id;
 
 SELECT * FROM vista_ventas;
+
+SELECT nombre FROM usuario WHERE run = '11-1';

@@ -51,8 +51,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario: " + nombre
-               + "Perfil: " + administrador;
+        return nombre;
     }
     
     
