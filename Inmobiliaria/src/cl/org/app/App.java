@@ -33,6 +33,9 @@ public class App extends javax.swing.JFrame {
     Data d;
     Logger logger = Logger.getLogger("Logs");
     FileHandler fh;
+    private String valorRol;
+    private int vRol;
+    private int vEst;
 
     public App() {
 
@@ -1396,23 +1399,24 @@ public class App extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             System.out.println("Se ha hecho doble click");
             int row = tabviviendas.getSelectedRow();
-            System.out.println(row);
+            int rolCol = 0;
+            // System.out.println(row);
 
             TMVivienda produc = (TMVivienda) tabviviendas.getModel();
             Vivienda v = produc.getViviendas(row);
-           
-            Data dat;
-            
-            /**
-             * 
-             * Mi idea aquí era obtener la dirección o el nrol de la columna seleccionada
-             *  para luego ejecutar un método data (getnumerorol)
-             * para que así me retorne un index para ponerlo en el cboupdateestado
-             * 
-             */
 
-//            System.out.println(v.getEstado());
-            
+            valorRol = tabviviendas.getModel().getValueAt(row, rolCol).toString();
+
+            System.out.println("Valor de Rol: " + valorRol);
+
+            try {
+                vRol = Integer.parseInt(valorRol);
+                vEst = d.getVivendaEstado(vRol);
+                System.out.println("Estado Vivienda INT: " + vEst);
+                cboUpdateEstado.setSelectedIndex(vEst - 1);
+            } catch (SQLException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     }//GEN-LAST:event_tabviviendasMouseClicked
@@ -1507,17 +1511,18 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnUpdateEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEstadoActionPerformed
-        Estado es;
-        Data dat;
-        int estado;
-        es = (Estado) cboUpdateEstado.getSelectedItem();
-        estado = es.getId();
+
+        int estado = (cboUpdateEstado.getSelectedIndex()+1);
         
-        // Aquí lo que pensaba hacer es rescatar el dato, para luego 
-        // ejecutar un método que actualizara la vivienda acorde a lo seleccionado en el combobox
-        
-//        dat.updateEstadoVivienda(estado, );
-        
+        System.out.println(estado);
+
+        try {
+            d.updEstadoVivienda(estado,vRol);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_btnUpdateEstadoActionPerformed
 
     public static void main(String args[]) {

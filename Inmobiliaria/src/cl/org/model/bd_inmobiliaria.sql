@@ -21,7 +21,7 @@ insert into tipoVivienda values(null,'Departamento');
 CREATE TABLE estado(
     id INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(100)
-);
+); -- SELECT * FROM estado;
 
 INSERT INTO estado VALUES(NULL,'Arrendada');
 INSERT INTO estado VALUES(NULL,'Vendida');
@@ -162,3 +162,7 @@ JOIN cliente cli ON ven.cliente_fk = cli.id;
 SELECT * FROM vista_ventas;
 
 SELECT nombre FROM usuario WHERE run = '11-1';
+
+SELECT estado FROM vivienda WHERE nrol = '9';
+
+UPDATE vivienda SET estado = 3 WHERE nrol = 11;

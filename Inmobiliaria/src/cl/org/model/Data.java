@@ -127,7 +127,7 @@ public class Data {
         con.close();
         return viviendas;
     }
-    
+
     //Viviendas Arrendadas y vendidas
     public List<Vivienda> verViviendasArrendadasyVendidas() throws SQLException {
         query = "select * from vivienda where vivienda.estado between 1 and 2";
@@ -152,7 +152,7 @@ public class Data {
         con.close();
         return viviendas;
     }
-    
+
     //viviendas Para arrendar o vender
     public List<Vivienda> verViviendasParaArrendarOvender() throws SQLException {
         query = "select * from vivienda where vivienda.estado between 3 and 4";
@@ -177,11 +177,9 @@ public class Data {
         con.close();
         return viviendas;
     }
-    
-    
-    
+
     //desc
-        public List<Vivienda> verViviendasPrecioDesc() throws SQLException {
+    public List<Vivienda> verViviendasPrecioDesc() throws SQLException {
         query = "select * from vivienda where vivienda.estado between 3 and 4 order by vivienda.precio desc";
         List<Vivienda> viviendas = new ArrayList<>();
         rs = con.ejecutarSelect(query);
@@ -204,9 +202,9 @@ public class Data {
         con.close();
         return viviendas;
     }
-        
-       //asc 
-     public List<Vivienda> verViviendasPrecioAsc() throws SQLException {
+
+    //asc 
+    public List<Vivienda> verViviendasPrecioAsc() throws SQLException {
         query = "select * from vivienda where vivienda.estado between 3 and 4 order by vivienda.precio asc";
         List<Vivienda> viviendas = new ArrayList<>();
         rs = con.ejecutarSelect(query);
@@ -229,8 +227,6 @@ public class Data {
         con.close();
         return viviendas;
     }
-    
-    
 
     public List<Venta> verVentas() throws SQLException {
         query = "select * from venta";
@@ -239,7 +235,7 @@ public class Data {
         Venta ven;
         while (rs.next()) {
             ven = new Venta();
-            
+
             ven.setId(rs.getInt(1));
             ven.setFecha(rs.getString(2));
             ven.setIdRol(rs.getInt(3));
@@ -251,7 +247,7 @@ public class Data {
         con.close();
         return ventas;
     }
-    
+
     public List<Log> getLog() throws SQLException {
         query = "SELECT * FROM log";
         List<Log> historial = new ArrayList<>();
@@ -259,20 +255,19 @@ public class Data {
 
         while (rs.next()) {
             Log l = new Log();
-            
+
             l.setId(rs.getInt(1));
             l.setRegistro(rs.getString(2));
             l.setFecha(rs.getString(3));
             l.setRun(rs.getString(4));
             l.setNombre(rs.getString(5));
-            
+
             historial.add(l);
         }
         con.close();
         return historial;
     }
-    
-    
+
     //rescatar nombre del vendedor por su rut
     public Usuario getUsuarioNombre(String run) throws SQLException {
         query = "SELECT nombre FROM usuario WHERE run = '" + run + "'";
@@ -287,23 +282,28 @@ public class Data {
         con.close();
         return usu;
     }
-    
-    // Obtiene nrol por direccion
-        public Vivienda getNumeroRol(String direccion) throws SQLException {
-        query = "SELECT nrol FROM vivienda WHERE direccion = '" + direccion + "'";
-        rs = con.ejecutarSelect(query);
-        Vivienda viv = null;
 
-        while (rs.next()) {
-            viv = new Vivienda();
-            viv.setnDeRol(rs.getInt(1));
+    // Cambiar estado de vivienda por nrol
+    public void updEstadoVivienda(int nrol, int estado) throws SQLException {
+        query = "UPDATE vivienda SET estado='" + estado + "' WHERE nrol = '" + nrol + "'";
+        con.ejecutar(query);
+        con.close();
+    }
+
+    public int getVivendaEstado(int rol) throws SQLException {
+        query = "SELECT estado FROM vivienda WHERE nrol = '" + rol + "'";
+        rs = con.ejecutarSelect(query);
+
+        int resultado = 0;
+
+        if (rs.next()) {
+            resultado = rs.getInt(1);
         }
 
         con.close();
-        return viv;
+        return resultado;
     }
 
-    
     // Actualizar
     public void updateCliente(Cliente mod) throws SQLException {
         query = "UPDATE cliente SET nombre = '" + mod.getNombre()
@@ -335,7 +335,7 @@ public class Data {
         con.ejecutar(query);
         con.close();
     }
-    
+
     public void updateEstadoVivienda(int estado, int nrol) throws SQLException {
         query = "UPDATE vivienda SET estado='" + estado + "' WHERE nrol = '" + nrol + "'";
         con.ejecutar(query);
@@ -450,5 +450,12 @@ public class Data {
 
         con.close();
         return resultado;
+    }
+
+    // Método que permite la inserción de datos cuando java no deja por el checking de FK en la BD
+    public void quitarFKCheck(int num) throws SQLException {
+        query = "SET FOREIGN_KEY_CHECKS="+num+"";
+        con.ejecutar(query);
+        con.close();
     }
 }
