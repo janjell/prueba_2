@@ -35,6 +35,10 @@ select * from vivienda where vivienda.estado between 2 and 3 order by vivienda.p
 
 select * from estado;
 
+UPDATE vivienda SET estado = 4 WHERE nrol = 1
+
+
+
 CREATE TABLE vivienda(
     nrol INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
     direccion VARCHAR(200),
@@ -49,6 +53,8 @@ CREATE TABLE vivienda(
 ); -- select * from vivienda;
 
 select * from vivienda where vivienda.estado between 1 and 2;
+
+select * from vivienda where vivienda.nuevo = true;
 
 insert into vivienda values(null,'psj3',1,2,3,1,500,true);
 insert into vivienda values(null,'psj3',2,2,3,1,500,true);
@@ -81,7 +87,7 @@ CREATE TABLE cliente(
 ); -- select * from cliente
 
 insert into cliente values(null,'33-3','Pabli',40000);
-insert into cliente values(null,'10-1','sada',40000);
+insert into cliente values(null,'10-1','Berny',40000);
 
 CREATE TABLE venta(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -137,3 +143,13 @@ FROM venta ven
 JOIN usuario usu ON ven.usuario_fk = usu.id;
 
 SELECT * FROM top_ventas;
+
+
+
+"select venta.id, venta.fecha, tipoVivienda.tipo, usuario.run, cliente.nombre "
+                + "from venta, usuario, cliente, tipoVivienda, vivienda "
+                + "where venta.usuario_fk = usuario.id and venta.cliente_fk = cliente.id and "
+                + "vivienda.tipoVivienda = tipoVivienda.id and venta.rol_fk = vivienda.nrol "
+                + and vivienda.tipoVivienda = 2;
+
+select * from vivienda where vivienda.tipovivienda = 2;

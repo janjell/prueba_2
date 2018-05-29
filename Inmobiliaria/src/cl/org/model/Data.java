@@ -285,13 +285,13 @@ public class Data {
 
     // Cambiar estado de vivienda por nrol
     public void updEstadoVivienda(int nrol, int estado) throws SQLException {
-        query = "UPDATE vivienda SET estado='" + estado + "' WHERE nrol = '" + nrol + "'";
+        query = "UPDATE vivienda SET estado = " + estado + " WHERE nrol = " + nrol;
         con.ejecutar(query);
         con.close();
     }
 
     public int getVivendaEstado(int rol) throws SQLException {
-        query = "SELECT estado FROM vivienda WHERE nrol = '" + rol + "'";
+        query = "SELECT estado FROM vivienda WHERE nrol = " + rol;
         rs = con.ejecutarSelect(query);
 
         int resultado = 0;
@@ -504,6 +504,124 @@ public class Data {
 
         con.close();
         return topLogin;
+    }
+    
+    public List<VentasString> cantidadCasasVendidas() throws SQLException {
+        query = "select venta.id, venta.fecha, tipoVivienda.tipo, usuario.run, cliente.nombre "
+                + "from venta, usuario, cliente, tipoVivienda, vivienda "
+                + "where venta.usuario_fk = usuario.id and venta.cliente_fk = cliente.id and "
+                + "vivienda.tipoVivienda = tipoVivienda.id and venta.rol_fk = vivienda.nrol "
+                + "and vivienda.tipoVivienda = 1;";
+        List<VentasString> ventas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        VentasString cas;
+
+        while (rs.next()) {
+            cas = new VentasString();
+
+            cas.setId(rs.getInt(1));
+            cas.setFecha(rs.getString(2));
+            cas.setIdRol(rs.getString(3));
+            cas.setIdUsuario(rs.getString(4));
+            cas.setIdCliente(rs.getString(5));
+            ventas.add(cas);
+        }
+
+        con.close();
+        return ventas;
+    }
+
+    public List<VentasString> cantidadDepartamentoVendidos() throws SQLException {
+        query = "select venta.id, venta.fecha, tipoVivienda.tipo, usuario.run, cliente.nombre "
+                + "from venta, usuario, cliente, tipoVivienda, vivienda "
+                + "where venta.usuario_fk = usuario.id and venta.cliente_fk = cliente.id and "
+                + "vivienda.tipoVivienda = tipoVivienda.id and venta.rol_fk = vivienda.nrol "
+                + "and vivienda.tipoVivienda = 2;";
+        List<VentasString> vent = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        VentasString cas;
+        
+
+        while (rs.next()) {
+            cas = new VentasString();
+
+            cas.setId(rs.getInt(1));
+            cas.setFecha(rs.getString(2));
+            cas.setIdRol(rs.getString(3));
+            cas.setIdUsuario(rs.getString(4));
+            cas.setIdCliente(rs.getString(5));
+            vent.add(cas);
+        }
+
+        con.close();
+        return vent;
+    }
+    
+    public List<VentasString> cantidadDepartamentoVendidossjkda() throws SQLException {
+        query = "select * from vivienda where vivienda.tipovivienda = 2;";
+        List<VentasString> vent = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        VentasString cas;
+        
+
+        while (rs.next()) {
+            cas = new VentasString();
+
+            cas.setId(rs.getInt(1));
+            cas.setFecha(rs.getString(2));
+            cas.setIdRol(rs.getString(3));
+            cas.setIdUsuario(rs.getString(4));
+            cas.setIdCliente(rs.getString(5));
+            vent.add(cas);
+        }
+
+        con.close();
+        return vent;
+    }
+    
+    
+    public List<VentasString> viviendasNuevas() throws SQLException {
+        query = "select * from vivienda where vivienda.nuevo = true";
+        List<VentasString> vent = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        VentasString cas;
+        
+
+        while (rs.next()) {
+            cas = new VentasString();
+
+            cas.setId(rs.getInt(1));
+            cas.setFecha(rs.getString(2));
+            cas.setIdRol(rs.getString(3));
+            cas.setIdUsuario(rs.getString(4));
+            cas.setIdCliente(rs.getString(5));
+            vent.add(cas);
+        }
+
+        con.close();
+        return vent;
+    }
+    
+    public List<VentasString> viviendasUsadas() throws SQLException {
+        query = "select * from vivienda where vivienda.nuevo = false";
+        List<VentasString> vent = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        VentasString cas;
+        
+
+        while (rs.next()) {
+            cas = new VentasString();
+
+            cas.setId(rs.getInt(1));
+            cas.setFecha(rs.getString(2));
+            cas.setIdRol(rs.getString(3));
+            cas.setIdUsuario(rs.getString(4));
+            cas.setIdCliente(rs.getString(5));
+            vent.add(cas);
+        }
+
+        con.close();
+        return vent;
     }
 
 }
