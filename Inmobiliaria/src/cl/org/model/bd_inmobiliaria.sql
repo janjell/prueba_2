@@ -113,7 +113,7 @@ select usuario.nombre from usuario where usuario.run = '66-6';
 -- Lista de viviendas Arrendadas o Vendidas
 select * from vivienda where vivienda.estado between 3 and 4; 
 
-select * from usuario
+select * from usuario;
 
 -- Creacion de trigger para tabla log
 
@@ -126,43 +126,14 @@ BEGIN
 end $$
 DELIMITER ;
 
--- Procedimiento para agregar clientes + inserción en log (Es provisional)
 
-DELIMITER //
-CREATE PROCEDURE crear_cliente (run_ve VARCHAR(20), nombre_ve VARCHAR(200),run_cl VARCHAR(20),nombre_cl VARCHAR(200), sueldo INT)
-BEGIN
-	DECLARE existe_run INT;
-    
-    SET existe_run = (SELECT COUNT(*) FROM cliente WHERE run = run);    
-    
-    IF existe_run = 0 THEN
-    
-    INSERT INTO cliente VALUES(NULL,run,nombre,sueldo);
-    INSERT INTO log VALUES(NULL,'Cliente Registrado',NOW(),run_ve,nombre_ve);
-        
-    END IF;
-END //
-DELIMITER ;
+-- Vista para mostrar top ventas
 
--- Vista para mostrar ventas (No se puede mostrar usuario (Tabla con mismo nombre -> cli = usu)
--- ¿Cambiamos el campo? 
-
-CREATE VIEW vista_ventas AS
+CREATE VIEW top_ventas AS -- DROP VIEW top_ventas;
 SELECT
-	ven.id,
     ven.fecha,
-    viv.nrol,
-    -- usu.nombre,
-    cli.nombre
+    usu.nombre
 FROM venta ven
-JOIN vivienda viv ON ven.rol_fk = viv.nrol
--- JOIN usuario usu ON ven.usuario_fk = usu.id
-JOIN cliente cli ON ven.cliente_fk = cli.id;
+JOIN usuario usu ON ven.usuario_fk = usu.id;
 
-SELECT * FROM vista_ventas;
-
-SELECT nombre FROM usuario WHERE run = '11-1';
-
-SELECT estado FROM vivienda WHERE nrol = '9';
-
-UPDATE vivienda SET estado = 3 WHERE nrol = 11;
+SELECT * FROM top_ventas;

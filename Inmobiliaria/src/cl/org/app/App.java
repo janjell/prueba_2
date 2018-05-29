@@ -5,6 +5,7 @@ import cl.org.model.Data;
 import cl.org.model.Estado;
 import cl.org.model.Log;
 import cl.org.model.TMLog;
+import cl.org.model.TMTop;
 import cl.org.model.TMVivienda;
 import cl.org.model.Usuario;
 import cl.org.model.Venta;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import cl.org.model.TMVenta;
+import cl.org.model.VistaTop;
 
 /**
  *
@@ -36,6 +38,7 @@ public class App extends javax.swing.JFrame {
     private String valorRol;
     private int vRol;
     private int vEst;
+    private int lgu = 0;
 
     public App() {
 
@@ -126,8 +129,12 @@ public class App extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         btnListar = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnListVAoV = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnTopVendedores = new javax.swing.JButton();
+        btnTopLogin = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
@@ -178,6 +185,12 @@ public class App extends javax.swing.JFrame {
         ListaviviendasArrendadasyVendidas = new javax.swing.JFrame();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabviviendasAoV = new javax.swing.JTable();
+        topVendedoresVentas = new javax.swing.JFrame();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tabTopVendedorVenta = new javax.swing.JTable();
+        topLogin = new javax.swing.JFrame();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tabTopLoginVendedor = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblRun = new javax.swing.JLabel();
         btnAceptarSesion = new javax.swing.JButton();
@@ -558,11 +571,33 @@ public class App extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Listado de Viviendas Arrendadas y Vendidas: ");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setText("Ver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnListVAoV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnListVAoV.setText("Ver");
+        btnListVAoV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnListVAoVActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Vendedores con más ventas:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Cantidad de inicio de sesión de vendedores:");
+
+        btnTopVendedores.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTopVendedores.setText("Ver");
+        btnTopVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopVendedoresActionPerformed(evt);
+            }
+        });
+
+        btnTopLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTopLogin.setText("Ver");
+        btnTopLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopLoginActionPerformed(evt);
             }
         });
 
@@ -573,18 +608,20 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(95, 95, 95))))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnListVAoV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTopVendedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTopLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(89, 89, 89))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,10 +633,18 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jButton2))
-                .addGap(79, 79, 79)
+                    .addComponent(btnListVAoV))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(btnTopVendedores))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(btnTopLogin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Estadisticas", jPanel7);
@@ -1105,6 +1150,68 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        topVendedoresVentas.setPreferredSize(new java.awt.Dimension(400, 300));
+
+        tabTopVendedorVenta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tabTopVendedorVenta);
+
+        javax.swing.GroupLayout topVendedoresVentasLayout = new javax.swing.GroupLayout(topVendedoresVentas.getContentPane());
+        topVendedoresVentas.getContentPane().setLayout(topVendedoresVentasLayout);
+        topVendedoresVentasLayout.setHorizontalGroup(
+            topVendedoresVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topVendedoresVentasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
+        );
+        topVendedoresVentasLayout.setVerticalGroup(
+            topVendedoresVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topVendedoresVentasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabTopLoginVendedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(tabTopLoginVendedor);
+
+        javax.swing.GroupLayout topLoginLayout = new javax.swing.GroupLayout(topLogin.getContentPane());
+        topLogin.getContentPane().setLayout(topLoginLayout);
+        topLoginLayout.setHorizontalGroup(
+            topLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        topLoginLayout.setVerticalGroup(
+            topLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLoginLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.lightGray);
 
@@ -1232,6 +1339,9 @@ public class App extends javax.swing.JFrame {
                     frameVendedor.setBounds(0, 0, 600, 500);
                     frameVendedor.setLocationRelativeTo(this);
                     frameAdministrador.setVisible(false);
+
+                    d.crearLog("Login de Vendedor", run, nombre);
+
                     logger.info("Login de Vendedor");
 
                 }
@@ -1494,12 +1604,12 @@ public class App extends javax.swing.JFrame {
         frameListaventas.setVisible(false);
     }//GEN-LAST:event_btnVolverVentasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnListVAoVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListVAoVActionPerformed
         CargarTablasVendidasArrendadas();
         ListaviviendasArrendadasyVendidas.setVisible(true);
         ListaviviendasArrendadasyVendidas.setBounds(0, 0, 500, 400);
         ListaviviendasArrendadasyVendidas.setLocationRelativeTo(this);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnListVAoVActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         cargarTablaPrecioasc();
@@ -1512,18 +1622,32 @@ public class App extends javax.swing.JFrame {
 
     private void btnUpdateEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEstadoActionPerformed
 
-        int estado = (cboUpdateEstado.getSelectedIndex()+1);
-        
+        int estado = (cboUpdateEstado.getSelectedIndex() + 1);
+
         System.out.println(estado);
 
         try {
-            d.updEstadoVivienda(estado,vRol);
+            d.updEstadoVivienda(estado, vRol);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
     }//GEN-LAST:event_btnUpdateEstadoActionPerformed
+
+    private void btnTopVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopVendedoresActionPerformed
+        cargarTablaTopVentas();
+        topVendedoresVentas.setVisible(true);
+        topVendedoresVentas.setBounds(0, 0, 500, 400);
+        topVendedoresVentas.setLocationRelativeTo(this);
+    }//GEN-LAST:event_btnTopVendedoresActionPerformed
+
+    private void btnTopLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopLoginActionPerformed
+        cargarTablaTopLogins();
+        topLogin.setVisible(true);
+        topLogin.setBounds(0, 0, 500, 400);
+        topLogin.setLocationRelativeTo(this);
+    }//GEN-LAST:event_btnTopLoginActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1584,7 +1708,10 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrarValor;
     private javax.swing.JButton btnCantidadBaños;
     private javax.swing.JButton btnCantidadPiezas;
+    private javax.swing.JButton btnListVAoV;
     private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnTopLogin;
+    private javax.swing.JButton btnTopVendedores;
     private javax.swing.JButton btnUpdateEstado;
     private javax.swing.JButton btnVolverVentas;
     private javax.swing.JButton btnborrarSueldoCliente;
@@ -1597,7 +1724,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JFrame frameListaventas;
     private javax.swing.JFrame frameVendedor;
     private javax.swing.JLabel imgUrizer;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -1607,6 +1733,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1649,6 +1777,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblPerfil;
@@ -1661,9 +1791,13 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JRadioButton opUsada;
     private javax.swing.JTable tabLog;
     private javax.swing.JTable tabPrecio;
+    private javax.swing.JTable tabTopLoginVendedor;
+    private javax.swing.JTable tabTopVendedorVenta;
     private javax.swing.JTable tabviviendas;
     private javax.swing.JTable tabviviendasAoV;
     private javax.swing.JTable tblVentas;
+    private javax.swing.JFrame topLogin;
+    private javax.swing.JFrame topVendedoresVentas;
     private javax.swing.JTextField txtCantBaños;
     private javax.swing.JTextField txtColorBotones;
     private javax.swing.JTextField txtColorTextoBotones;
@@ -1774,6 +1908,30 @@ public class App extends javax.swing.JFrame {
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private void cargarTablaTopVentas() {
+        try {
+            List<VistaTop> topVentas = d.verTopVentas();
+            TMTop model = new TMTop(topVentas);
+            tabTopVendedorVenta.setModel(model);
+            logger.info("Se carga tabla top ventas.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Vivienda.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void cargarTablaTopLogins() {
+        try {
+            List<Log> topLogin = d.verTopLogin();
+            TMLog model = new TMLog(topLogin);
+            tabTopLoginVendedor.setModel(model);
+            logger.info("Se carga la tabla top logins.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Log.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

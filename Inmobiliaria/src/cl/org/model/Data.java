@@ -454,8 +454,56 @@ public class Data {
 
     // Método que permite la inserción de datos cuando java no deja por el checking de FK en la BD
     public void quitarFKCheck(int num) throws SQLException {
-        query = "SET FOREIGN_KEY_CHECKS="+num+"";
+        query = "SET FOREIGN_KEY_CHECKS=" + num + "";
         con.ejecutar(query);
         con.close();
     }
+
+    // Top de Ventas 
+    public List<VistaTop> verTopVentas() throws SQLException {
+        query = "SELECT * FROM top_ventas;";
+        List<VistaTop> topVentas = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        VistaTop vtp;
+        while (rs.next()) {
+            vtp = new VistaTop();
+
+            vtp.setFecha(rs.getString(1));
+            vtp.setNombre(rs.getString(2));
+            topVentas.add(vtp);
+        }
+
+        con.close();
+        return topVentas;
+    }
+
+    // Creacion de log
+    public void crearLog(String registro, String run, String nombre) throws SQLException {
+        query = "INSERT INTO log VALUES(NULL,'" + registro + "' ,CURDATE() , '" + run + "','" + nombre + "')";
+        con.ejecutar(query);
+        con.close();
+    }
+
+    // Ver top de logins
+    public List<Log> verTopLogin() throws SQLException {
+        query = "SELECT * FROM log WHERE registro = 'Login de Vendedor';";
+        List<Log> topLogin = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Log log;
+        while (rs.next()) {
+            log = new Log();
+
+            log.setId(rs.getInt(1));
+            log.setRegistro(rs.getString(2));
+            log.setFecha(rs.getString(3));
+            log.setRun(rs.getString(4));
+            log.setNombre(rs.getString(5));
+
+            topLogin.add(log);
+        }
+
+        con.close();
+        return topLogin;
+    }
+
 }
